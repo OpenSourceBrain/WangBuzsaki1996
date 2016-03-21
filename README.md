@@ -13,3 +13,6 @@ More details on the original NEURON version of this model [here](https://github.
 ### NeuroML2/LEMS version of model
 
 The model will be converted to NeuroML2/LEMS:
+
+------------------------------
+[![Build Status](https://travis-ci.org/OpenSourceBrain/WangBuzsaki1996.svg?branch=master)](https://travis-ci.org/OpenSourceBrain/WangBuzsaki1996)
