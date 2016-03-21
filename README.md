@@ -6,7 +6,7 @@ Model from: Wang XJ, Buzsaki G (1996) Gamma oscillation by synaptic inhibition i
 
 This model was originally developed in [NEURON](https://www.neuron.yale.edu/neuron/)
 
-![](https://raw.githubusercontent.com/OpenSourceBrain/WangBuzsaki1996/master/ModelDB_NEURON/WangBuzsaki96_ModelDB.png)
+![](https://raw.githubusercontent.com/OpenSourceBrain/WangBuzsaki1996/master/ModelDB_NEURON/WangBuzsaki96_original.png)
 
 More details on the original NEURON version of this model [here](https://github.com/OpenSourceBrain/WangBuzsaki1996/tree/master/ModelDB_NEURON).
 
