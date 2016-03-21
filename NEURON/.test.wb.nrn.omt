@@ -1,0 +1,12 @@
+target: tester.hoc
+engine: NEURON
+mep: ../WB96.mep
+
+experiments:
+  current clamp:
+    observables:
+      spike times:
+        file:
+          path: wb.dat
+          columns: [0]  
+          tolerance: 1e-2
