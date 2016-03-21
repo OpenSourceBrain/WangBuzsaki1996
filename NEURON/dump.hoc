@@ -1,5 +1,0 @@
-objref dump
-dump = new File()
-dump.wopen("wb.dat")
-vspike.printf()
-vspike.printf(dump, "%g \n")
