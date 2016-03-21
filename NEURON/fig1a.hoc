@@ -1,0 +1,29 @@
+load_file("nrngui.hoc")
+load_file("single.ses")
+
+objref nc, nil, vspike
+soma nc = new NetCon(&v(.5), nil)
+nc.threshold = -10
+vspike = new Vector()
+nc.record(vspike)
+
+func freq() {local n, tt
+	if ($o1.size > 2) {
+		n = $o1.size-1
+		tt = $o1.x[n] - $o1.x[0]
+		return 1000*n/tt
+	}else{
+		return 0
+	}
+}
+
+load_file("freqgraph.ses")
+//Graph[1].gif("jnsci16_6402F1A.gif",0,0,.02,400)
+//Graph[1].gif("temp.gif",0,0,.02,400)
+
+
+cvode_active(1)
+
+{object_push(Grapher[0])}
+doplt()
+{object_pop()}

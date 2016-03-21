@@ -1,0 +1,39 @@
+objectvar save_window_, rvp_
+objectvar scene_vector_[5]
+objectvar ocbox_, ocbox_list_, scene_, scene_list_
+{ocbox_list_ = new List()  scene_list_ = new List()}
+
+//Begin Grapher
+{
+load_file("grapher.hoc")}
+{
+ocbox_=new Grapher(1)
+
+ocbox_.info("IClamp[0].amp","IClamp[0].amp", "run()", 2.32831e-10, 0.02, 0, 410, 21, 0, 0.02)
+{
+save_window_=ocbox_.g
+save_window_.size(0,0.02,0,400)
+scene_vector_[4] = save_window_
+ocbox_.g = save_window_
+
+{x0=0 y0=0 x1=.02 y1=400}
+{wg=377 hg=420}
+{xg0=135 yg0=420-(279+44) xg1=135+225 yg1=420-44}
+left = x0 - xg0*(x1-x0)/(xg1-xg0)
+bottom = y0 - yg0*(y1-y0)/(yg1-yg0)
+width = wg*(x1-x0)/(xg1-xg0)
+height= hg*(y1-y0)/(yg1-yg0)
+
+save_window_.gif("jnsci16_6402F1A.gif",left, bottom, width, height)
+save_window_.save_name("ocbox_.g")
+save_window_.xexpr("IClamp[0].amp", 0)
+save_window_.addexpr("freq(vspike)", 2, 1, 0.522045, 0.971799, 2)
+}
+ocbox_ = ocbox_.vbox
+ocbox_.map("Grapher", 893, 50, 308.16, 453.12)
+}
+objref ocbox_
+//End Grapher
+
+objectvar scene_vector_[1]
+{doNotify()}
