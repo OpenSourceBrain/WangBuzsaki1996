@@ -1,0 +1,19 @@
+load_file("nrngui.hoc")
+xpanel("Wang and Buzsaki (1996)")
+xlabel("Only one figure may be simulated for each launch of NEURON")
+xbutton("Fig 1A", "fig1a()")
+xbutton("Fig 3A", "fig3a()")
+xpanel(100, 100)
+
+proc fig1a() {
+	load_file("fig1a.hoc")
+	rmv()
+}
+proc fig3a() {
+	load_file("jnsci16_6402F3.hoc")
+	rmv()
+}
+
+proc rmv() {
+	PWManager[0].close(1)
+}
