@@ -10,17 +10,17 @@ To run the scripts, [install NEURON](https://www.neuron.yale.edu/neuron/download
     nrngui mosinit.hoc  # runs the example simulation
     press Fig 1A
 
-![]()
+![](https://raw.githubusercontent.com/OpenSourceBrain/WangBuzsaki1996/master/ModelDB_NEURON/Fig1A.png)
 
     press Fig 3A
     press Run or Init & Run
     when the simulation stops press Spike plot
 
-![]()
+![](https://raw.githubusercontent.com/OpenSourceBrain/WangBuzsaki1996/master/ModelDB_NEURON/Fig3A_Spike_plot.png)
 
     or when the simulation stops press Plot cells A&B
     
-![]()
+![](https://raw.githubusercontent.com/OpenSourceBrain/WangBuzsaki1996/master/ModelDB_NEURON/Fig3A_Plot_cells_AB.png)
 
 Technical notes from the authors:
 
