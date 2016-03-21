@@ -26,4 +26,4 @@ Technical notes from the authors:
 
 > In the [original paper](http://www.jneurosci.org/content/16/20/6402.full), current injection is given in unit of mA/cm2. Here we have choosen a cell size of 100 um/cm2 so that nA is equivalent to mA/cm2.
 
-> In the original paper, phi directly alters the time constant as a factor in differential equation. In this implementation phi (phi0) alters celsius appropriately.
+> In the [original paper](http://www.jneurosci.org/content/16/20/6402.full), phi directly alters the time constant as a factor in differential equation. In this implementation phi (phi0) alters celsius appropriately.
