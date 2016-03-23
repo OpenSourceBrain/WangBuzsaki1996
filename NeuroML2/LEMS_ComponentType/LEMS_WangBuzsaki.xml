@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Lems>
+
+  <!-- Wang-Buzsaki basket cell with classical HH Sodium, Potassium and leak conductance
+  + current clamp to make it spike -->
+
+    <Target component="sim1"/>
+
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+    <Include file="WangBuzsaki.xml"/>
+
+    <wangBuzsakiBasketCell id="wb1" C="1uF_per_cm2" v0="-70mV" I_app="0.1uA_per_cm2" gL="0.1mS_per_cm2" eL="-65mV" gNa="35mS_per_cm2" eNa="55mV" alpham_scale="-10mV" alpham_midpoint="-35mV" betam_rate="4per_ms" betam_midpoint="-60mV" betam_scale="-18mV" h_q="5" alphah_rate="0.07per_ms" alphah_midpoint="-58mV" alphah_scale="-20mV" betah_scale="-10mV" betah_midpoint="-28mV" gK="9mS_per_cm2" eK="-90mV" n_q="5" alphan_scale1="-10mV" alphan_midpoint="-34mV" alphan_scale2="-100mV" betan_rate="0.125per_ms" betan_midpoint="-44mV" betan_scale="-80mV"/>
+
+    <network id="net1">
+    
+        <population id="pop" component="wb1" size="1"/>
+    
+    </network>
+
+<!-- End of NeuroML2 content -->
+        
+<!-- Simulation specifications -->
+
+    <Simulation id="sim1" length="100ms" step="0.01ms" target="net1">
+
+        <Display id="d1" title="WangBuzsaki PV+BC with 100 pA input" timeScale="1ms" xmin="-10" xmax="110" ymin="-80" ymax="40">
+            <Line id="PV+BC V" quantity="pop[0]/v" scale="1mV" color="#0000ff" timeScale="1ms"/>
+        </Display>
+    
+        <OutputFile id="of0" fileName="wangbuzsaki.dat">
+            <OutputColumn id="bc" quantity="pop[0]/v"/>
+        </OutputFile>
+      
+    </Simulation>
+  
+</Lems>
