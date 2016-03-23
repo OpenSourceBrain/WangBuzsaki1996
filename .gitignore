@@ -3,5 +3,4 @@ NeuroML2/*.mod
 NeuroML2/*nrn.py
 x86_64
 *~
-
-
+/NeuroML2/LEMS_ComponentType/wangbuzsaki.dat
