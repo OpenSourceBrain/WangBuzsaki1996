@@ -46,6 +46,7 @@
         <Parameter name="betan_rate" dimension="per_time"/>
         <Parameter name="betan_midpoint" dimension="voltage"/>
         <Parameter name="betan_scale" dimension="voltage"/>
+        <Parameter name="spikeThresh" dimension="voltage"/> 
 
         <Attachments name="synapses" type="basePointCurrent"/>
 
@@ -54,6 +55,8 @@
         <Exposure name="h_inf" dimension="none"/>
         <Exposure name="n" dimension="none"/>
         <Exposure name="n_inf" dimension="none"/>
+        <Exposure name="iSyn" dimension="current" description="Total current due to synaptic inputs"/>
+        <Exposure name="spiking" dimension="none"/>
        
         <Dynamics>
 
@@ -62,6 +65,7 @@
             
             <StateVariable name="h" dimension="none" exposure="h"/>
             <StateVariable name="n" dimension="none" exposure="n"/>
+            <StateVariable name="spiking" exposure="spiking" dimension="none"/>
 
             <!-- chanel kinetics -->
             <DerivedVariable name="tmp" dimension="none" value="(v-alpham_midpoint)/alpham_scale"/>
@@ -74,6 +78,7 @@
             <DerivedVariable name="alphan" dimension="per_time" value="(alphan_rate*(v-alphan_midpoint)/alphan_scale1)/(1-exp(0-(v-alphan_midpoint)/alphan_scale2))"/>
             <DerivedVariable name="betan" dimension="per_time" value="betan_rate*exp((v-betan_midpoint)/(betan_scale))"/>
             <DerivedVariable name="n_inf" dimension="none" value="alphan/(alphan+betan)" exposure="n_inf"/>
+            <DerivedVariable name="iSyn" dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
 
             <!-- TODO: implement synaptic currents -->
             <TimeDerivative variable="v" value="(-gL*(v-eL)-gNa*m_inf^3*h*(v-eNa)-gK*n^4*(v-eK))/C"/>
@@ -84,8 +89,18 @@
                 <StateAssignment variable="v" value="v0"/>
                 <StateAssignment variable="h" value="h_inf"/>
                 <StateAssignment variable="n" value="n_inf"/>
+                <StateAssignment variable="spiking" value="0"/>
             </OnStart>
 
+            <OnCondition test="v .gt. spikeThresh .and. spiking .lt. 0.5">
+                <StateAssignment variable="spiking" value="1"/>
+                <EventOut port="spike"/>
+            </OnCondition>
+
+            <OnCondition test="v .lt. spikeThresh">
+                <StateAssignment variable="spiking" value="0"/>
+            </OnCondition>
+            
         </Dynamics>
 
     </ComponentType>
