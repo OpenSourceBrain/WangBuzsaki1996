@@ -17,7 +17,6 @@
         <!-- leak conductance -->
         <Parameter name="gL" dimension="conductanceDensity"/>
         <Parameter name="eL" dimension="voltage"/>
-        <Parameter name="I_app" dimension="currentDensity"/>
 
         <!-- Na+ channel -->
         <Parameter name="gNa" dimension="conductanceDensity"/>
@@ -48,6 +47,8 @@
         <Parameter name="betan_midpoint" dimension="voltage"/>
         <Parameter name="betan_scale" dimension="voltage"/>
 
+        <Attachments name="synapses" type="basePointCurrent"/>
+
         <Exposure name="m_inf" dimension="none"/>
         <Exposure name="h" dimension="none"/>
         <Exposure name="h_inf" dimension="none"/>
@@ -75,7 +76,7 @@
             <DerivedVariable name="n_inf" dimension="none" value="alphan/(alphan+betan)" exposure="n_inf"/>
 
             <!-- TODO: implement synaptic currents -->
-            <TimeDerivative variable="v" value="(-gL*(v-eL)-gNa*m_inf^3*h*(v-eNa)-gK*n^4*(v-eK)+I_app)/C"/>
+            <TimeDerivative variable="v" value="(-gL*(v-eL)-gNa*m_inf^3*h*(v-eNa)-gK*n^4*(v-eK))/C"/>
             <TimeDerivative variable="h" value="h_q*(alphah*(1-h)-betah*h)"/>
             <TimeDerivative variable="n" value="n_q*(alphan*(1-n)-betan*n)"/>
 

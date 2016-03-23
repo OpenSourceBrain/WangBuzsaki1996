@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <Lems>
 
-  <!-- Wang-Buzsaki basket cell with classical HH Sodium, Potassium and leak conductance
-  + current clamp to make it spike -->
+<!-- Wang-Buzsaki basket cell with classical HH Sodium, Potassium and leak conductance + current clamp to make it spike -->
 
     <Target component="sim1"/>
 
@@ -12,24 +11,37 @@
 
     <Include file="WangBuzsaki.xml"/>
 
-    <wangBuzsakiBasketCell id="wb1" C="1uF_per_cm2" v0="-70mV" I_app="0.1uA_per_cm2" gL="0.1mS_per_cm2" eL="-65mV" gNa="35mS_per_cm2" eNa="55mV" alpham_rate="1per_ms" alpham_midpoint="-35mV" alpham_scale="10mV"  betam_rate="4per_ms" betam_midpoint="-60mV" betam_scale="-18mV" h_q="5" alphah_rate="0.07per_ms" alphah_midpoint="-58mV" alphah_scale="-20mV" betah_rate="1per_ms" betah_midpoint="-28mV" betah_scale="-10mV"  gK="9mS_per_cm2" eK="-90mV" n_q="5" alphan_rate="1per_ms" alphan_midpoint="-34mV" alphan_scale1="100mV"  alphan_scale2="10mV" betan_rate="0.125per_ms" betan_midpoint="-44mV" betan_scale="-80mV"/>
+    <wangBuzsakiBasketCell id="wb1" C="1uF_per_cm2" v0="-70mV" gL="0.1mS_per_cm2" eL="-65mV" gNa="35mS_per_cm2" eNa="55mV" alpham_rate="1per_ms" alpham_midpoint="-35mV" alpham_scale="10mV"  betam_rate="4per_ms" betam_midpoint="-60mV" betam_scale="-18mV" h_q="5" alphah_rate="0.07per_ms" alphah_midpoint="-58mV" alphah_scale="-20mV" betah_rate="1per_ms" betah_midpoint="-28mV" betah_scale="-10mV"  gK="9mS_per_cm2" eK="-90mV" n_q="5" alphan_rate="1per_ms" alphan_midpoint="-34mV" alphan_scale1="100mV"  alphan_scale2="10mV" betan_rate="0.125per_ms" betan_midpoint="-44mV" betan_scale="-80mV"/>
 
-    <network id="net1">
-    
-        <population id="pop" component="wb1" size="1"/>
-    
+<!-- Create a single-cell network -->
+
+    <pulseGenerator id="IClamp" delay="0ms" duration="100ms" amplitude="100pA"/>
+
+    <network id="net1" type="networkWithTemperature" temperature = "35.0 degC">
+        <population id="pop" component="wb1" type="populationList" size="1">
+            <instance id="0">
+                <location x="0" y="0" z="0"/>
+            </instance>
+        </population>
+
+        <inputList id="IClamp" component="IClamp" population="pop">
+            <input id="0" target="../pop/0/wb1" destination="synapses"/>
+        </inputList>
+
     </network>
+
 <!-- End of NeuroML2 content -->
         
 <!-- Simulation specifications -->
+
     <Simulation id="sim1" length="100ms" step="0.01ms" target="net1">
 
         <Display id="d1" title="WangBuzsaki PV+BC with 100 pA input" timeScale="1ms" xmin="-10" xmax="110" ymin="-80" ymax="40">
-            <Line id="PV+BC V" quantity="pop[0]/v" scale="1mV" color="#0000ff" timeScale="1ms"/>
+            <Line id="PV+BC V" quantity="pop/0/wb1/v" scale="1mV" color="#0000ff" timeScale="1ms"/>
         </Display>
     
         <OutputFile id="of0" fileName="wangbuzsaki.dat">
-            <OutputColumn id="bc" quantity="pop[0]/v"/>
+            <OutputColumn id="bc" quantity="pop/0/wb1/v"/>
         </OutputFile>
       
     </Simulation>
