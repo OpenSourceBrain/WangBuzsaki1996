@@ -11,6 +11,7 @@
 
         <!-- TODO: add synapses !!! -->
 
+        <Parameter name="r" dimension="length"/>
         <Parameter name="C" dimension="specificCapacitance"/>
         <Parameter name="v0" dimension="voltage"/>
 
@@ -78,10 +79,12 @@
             <DerivedVariable name="alphan" dimension="per_time" value="(alphan_rate*(v-alphan_midpoint)/alphan_scale1)/(1-exp(0-(v-alphan_midpoint)/alphan_scale2))"/>
             <DerivedVariable name="betan" dimension="per_time" value="betan_rate*exp((v-betan_midpoint)/(betan_scale))"/>
             <DerivedVariable name="n_inf" dimension="none" value="alphan/(alphan+betan)" exposure="n_inf"/>
+            <DerivedVariable name="surface" dimension="area" value="4*3.1415926*r*r"/>
+            <DerivedVariable name="C_total" dimension="capacitance" value="C*surface"/>
             <DerivedVariable name="iSyn" dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
 
             <!-- TODO: implement synaptic currents -->
-            <TimeDerivative variable="v" value="(-gL*(v-eL)-gNa*m_inf^3*h*(v-eNa)-gK*n^4*(v-eK))/C"/>
+            <TimeDerivative variable="v" value="(-gL*(v-eL)-gNa*m_inf^3*h*(v-eNa)-gK*n^4*(v-eK))/(C_total/surface)+iSyn/C_total"/>
             <TimeDerivative variable="h" value="h_q*(alphah*(1-h)-betah*h)"/>
             <TimeDerivative variable="n" value="n_q*(alphan*(1-n)-betan*n)"/>
 
