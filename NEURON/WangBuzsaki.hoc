@@ -1,0 +1,26 @@
+create soma
+access soma
+
+soma.nseg = 1
+soma.diam = 10
+soma.L = 3.1831
+soma.cm = 1
+soma insert pas
+soma.g_pas = 0.0001
+soma.e_pas = -65
+soma insert naf
+soma.gmax_naf = 0.035
+soma insert kdr
+soma.gmax_kdr = 0.009
+
+objectvar stim
+stim = new IClamp(0.5)
+
+stim.del = 0
+stim.dur = 100
+stim.amp = 0.002
+
+tstop = 100
+dt = 0.01
+
+run()

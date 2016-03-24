@@ -1,5 +1,18 @@
-objref dump
+objref rect, rev, tmp, dump
+
+rect = new Vector()
+recv = new Vector()
+tmp = new Matrix()
 dump = new File()
-dump.wopen("wb.dat")
-vspike.printf()
-vspike.printf(dump, "%g \n")
+
+rect.record(&t)
+recv.record(&soma.v(0.5))
+
+dump.wopen("wangbuzsaki.dat")
+
+tmp.resize(rect.size(),2)
+tmp.setcol(0, rect)
+tmp.setcol(1, recv)
+tmp.fprint(dump, "%g")
+
+dump.close()
