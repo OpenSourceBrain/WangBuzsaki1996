@@ -1,0 +1,18 @@
+target: tester.hoc
+engine: NEURON
+mep: ../.test.wb.mep
+
+experiments:
+  current clamp:
+    observables:
+      spike times:
+        file:
+          path: wangbuzsaki.dat
+          columns: [0, 1]
+          header: 2
+          scaling: [1000, 1000]
+        spike detection:
+          method: threshold
+          threshold: 0
+          toerance: 0.01
+
