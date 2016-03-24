@@ -7,4 +7,4 @@ To run the scripts, [install NEURON](https://www.neuron.yale.edu/neuron/download
     git clone https://github.com/OpenSourceBrain/WangBuzsaki1996.git  # clone git repository
     cd WangBuzsaki1996/NEURON
     nrnivmodl  # compile .mod files
-    nrngui tester.hoc  # runs a modified example simulation, and saves spike times to wb.dat (current clamp) 
+    nrngui tester.hoc  # runs a simulation (single cell, current clamp) and saves data into wangbuzsaki.dat
