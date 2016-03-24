@@ -24,6 +24,6 @@ To run the scripts, [install NEURON](https://www.neuron.yale.edu/neuron/download
 
 Technical notes from the authors:
 
-> In the [original paper](http://www.jneurosci.org/content/16/20/6402.full), current injection is given in unit of mA/cm2. Here we have choosen a cell size of 100 um/cm2 so that nA is equivalent to mA/cm2.
+> In the [original paper](http://www.jneurosci.org/content/16/20/6402.full), current injection is given in unit of uA/cm2. Here we have choosen a cell size of 100 um/cm2 so that nA is equivalent to uA/cm2.
 
 > In the [original paper](http://www.jneurosci.org/content/16/20/6402.full), phi directly alters the time constant as a factor in differential equation. In this implementation phi (phi0) alters celsius appropriately.
