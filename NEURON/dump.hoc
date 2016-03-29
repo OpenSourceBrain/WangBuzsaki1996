@@ -1,18 +1,18 @@
-objref rect, rev, tmp, dump
+objref recv, dump
 
-rect = new Vector()
 recv = new Vector()
-tmp = new Matrix()
 dump = new File()
 
-rect.record(&t)
 recv.record(&soma.v(0.5))
+
+run()
 
 dump.wopen("wangbuzsaki.dat")
 
-tmp.resize(rect.size(),2)
-tmp.setcol(0, rect)
-tmp.setcol(1, recv)
-tmp.fprint(dump, "%g")
+dt = 0.00001 // in SI (just for saving...)
+
+for i=0, recv.size()-1 {
+    dump.printf("%g %g\n", dt*i, recv.x(i)*0.001)
+}
 
 dump.close()

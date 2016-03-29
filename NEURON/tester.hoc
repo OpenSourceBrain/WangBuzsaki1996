@@ -1,4 +1,4 @@
 load_file("nrngui.hoc")
 load_file("WangBuzsaki.hoc")
-load_file("WangBuzsaki.ses")
+// load_file("WangBuzsaki.ses")
 load_file("dump.hoc")

@@ -5,7 +5,7 @@ soma.nseg = 1
 soma.diam = 10
 soma.L = 10./PI
 soma.cm = 1
-soma.Ra = 100
+soma.Ra = 35.4
 soma insert pas
 soma.g_pas = 0.0001
 soma.e_pas = -65
@@ -17,9 +17,10 @@ v_init = -70
 
 t = 0
 dt = 0.01
+steps_per_ms = 100
 tstop = 100
 
-celsius = 6.3
+celsius = 37
 
 na_init = 10
 k_init = 54.4
@@ -30,5 +31,3 @@ stim = new IClamp(0.5)
 stim.del = 0
 stim.dur = 100
 stim.amp = 0.002
-
-run()
