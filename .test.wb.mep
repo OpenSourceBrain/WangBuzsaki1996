@@ -3,5 +3,5 @@ system: Testing the Wang-Buzsáki 1996 Basket cell model
 experiments:
   current clamp:
     expected:
-      spike times: [0, 0.1]
+      spike times: [8.87, 18.73, 28.57, 38.39, 48.22, 58.05, 67.88, 77.71000000000001, 87.54, 97.37]
 
