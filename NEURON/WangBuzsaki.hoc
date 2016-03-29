@@ -16,8 +16,8 @@ soma.gmax_kdr = 0.009
 v_init = -70
 
 t = 0
-dt = 0.01
-steps_per_ms = 100
+dt = 0.001
+steps_per_ms = 1000
 tstop = 100
 
 celsius = 37

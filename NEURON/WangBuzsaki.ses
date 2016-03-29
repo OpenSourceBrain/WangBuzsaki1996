@@ -18,9 +18,9 @@ t = 100
 xvalue("t","t", 2 )
 tstop = 100
 xvalue("Tstop","tstop", 1,"tstop_changed()", 0, 1 )
-dt = 0.01
+dt = 0.001
 xvalue("dt","dt", 1,"setdt()", 0, 1 )
-steps_per_ms = 100
+steps_per_ms = 1000
 xvalue("Points plotted/ms","steps_per_ms", 1,"setdt()", 0, 1 )
 screen_update_invl = 0.05
 xvalue("Scrn update invl","screen_update_invl", 1,"", 0, 1 )

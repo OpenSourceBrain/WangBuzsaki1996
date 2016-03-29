@@ -1,4 +1,4 @@
-target: WangBuzsaki.py
+target: testWangBuzsaki.py
 engine: Brian
 mep: ../.test.wb.mep
 
@@ -13,5 +13,5 @@ experiments:
         spike detection:
           method: threshold
           threshold: 0
-        tolerance: 0.02691
+        tolerance: 0.0035
 
