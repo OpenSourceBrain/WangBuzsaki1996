@@ -5,28 +5,26 @@
 
 <!-- Ion channels -->
 
-
-
     <ComponentType name="gateHHratesInstantaneous"
                    extends="gateHHrates"
-                   description="Gate which follows the general Hodgkin Huxley formalism, except for tau =0">
+                   description="Gate which follows the general Hodgkin Huxley formalism, except for tau = 0">
 
-        <Constant name="SEC" dimension="time" value="1 s"/>
         <Child name="notes" type="notes"/>
 
         <Child name="forwardRate" type="baseVoltageDepRate"/>
         <Child name="reverseRate" type="baseVoltageDepRate"/>
 
+        <Constant name="SEC" dimension="time" value="1s"/>
 
         <Exposure name="alpha" dimension="per_time"/>
         <Exposure name="beta" dimension="per_time"/>
 
         <Exposure name="tau" dimension="time"/>
         <Exposure name="inf" dimension="none"/>
-
+        
+        <Exposure name="rateScale" dimension="none"/>
 
         <Dynamics>
-
 
             <DerivedVariable name="alpha" dimension="per_time" exposure="alpha" select="forwardRate/r"/>
             <DerivedVariable name="beta" dimension="per_time" exposure="beta" select="reverseRate/r"/>
@@ -36,39 +34,43 @@
             <DerivedVariable name="tau" dimension="time" exposure="tau" value="0 * SEC"/>
 
             <DerivedVariable name="q"  exposure="q" dimension="none" value="inf"/>
+            
+            <DerivedVariable name="rateScale" exposure="rateScale" dimension="none" value="1"/>
 
             <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="q^instances"/>
 
-
         </Dynamics>
+        
     </ComponentType>
 
-
-    <!-- k channel: n forward rate-->
     <ComponentType name="HHDoubleScaledExpLinearRate"
-                   extends="baseVoltageDepVariable"
-                   description="Exponential linear form for variable equation (to describe the forward rate of WangBuzsáki1996 K+ channel)">
-
+                   extends="baseVoltageDepRate"
+                   description="Exponential linear form for variable equation (to describe some of the channel rates in WangBuzsáki1996)">
+        
         <Parameter name="rate" dimension="per_time"/>
         <Parameter name="midpoint" dimension="voltage"/>
         <Parameter name="scale1" dimension="voltage"/>
         <Parameter name="scale2" dimension="voltage"/>
 
-        <Dynamics>
-            <DerivedVariable name="x" dimension="none" exposure="x" value="((v - midpoint)/scale1)/(1 - exp(0 - (v - midpoint)/scale2))"/>
+        <Dynamics>         
+            <DerivedVariable name="tmp" value="(v - midpoint)/scale2" dimension="none"/>
+
+            <ConditionalDerivedVariable name="r" exposure="r" dimension="per_time">
+                <Case condition="tmp .neq. 0" value="rate * ((v - midpoint)/scale1) / (1 - exp(0 - tmp))"/>
+                <Case condition="tmp .eq. 0" value="rate"/>
+            </ConditionalDerivedVariable>
         </Dynamics>
 
     </ComponentType>
     
-    <!-- END of new ComponentTypes -->
+<!-- END of new ComponentTypes -->
 
-
-    <ionChannel id="leak" type="ionChannelPassive" conductance="0.1nS" species="non_specific"/>
+    <ionChannel id="leak" type="ionChannelPassive" conductance="0.1nS" /> <!--species="non_specific"/>-->
 
     <ionChannel id="na_chan" type="ionChannelHH" conductance="35nS" species="na">
 
         <gateHHrates type="gateHHratesInstantaneous" id="m" instances="3">
-            <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-35mV" scale="-10mV"/>
+            <forwardRate type="HHDoubleScaledExpLinearRate" rate="1per_ms" midpoint="-35mV" scale1="-10mV" scale2="10mV"/>
             <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-60mV" scale="-18mV"/>
         </gateHHrates>
     
@@ -84,8 +86,7 @@
 
         <gateHHrates id="n" instances="4">
             <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="37.0 degC"/>
-            <!--<forwardRate type="HHExpRate" rate="0.07per_ms" midpoint="-58mV" scale="-20mV"/>-->
-            <forwardRate type="HHDoubleScaledExpLinearRate" rate="0.01per_ms" midpoint="-34mV" scale1="10.1mV" scale2="10.1mV"/>
+            <forwardRate type="HHDoubleScaledExpLinearRate" rate="1per_ms" midpoint="-34mV" scale1="-100mV" scale2="10mV"/>
             <reverseRate type="HHExpRate" rate="0.125per_ms" midpoint="-44mV" scale="-80mV"/>
         </gateHHrates>
 
@@ -118,7 +119,7 @@
 
             <membraneProperties>
 
-                <channelDensity condDensity="35mS_per_cm2" id="na_all" ionChannel="na_chan" erev="55.0 mV" ion="na"/>
+                <!--<channelDensity condDensity="35mS_per_cm2" id="na_all" ionChannel="na_chan" erev="55.0 mV" ion="na"/>-->
                 <channelDensity condDensity="9mS_per_cm2" id="k_all" ionChannel="k_chan" erev="-90.0 mV" ion="k"/>
                 <channelDensity condDensity="0.1mS_per_cm2" id="passive" ionChannel="leak" erev="-65 mV" ion="non_specific"/>
 
@@ -127,7 +128,6 @@
                 <initMembPotential value="-70.0 mV"/>
 
             </membraneProperties>
-
 
             <intracellularProperties>
 
@@ -143,11 +143,10 @@
 
     <pulseGenerator id="IClamp" delay="0ms" duration="100ms" amplitude="2pA" />
 
-
 <!-- Create a single-cell network -->
 
-    <network id="net1" type="networkWithTemperature" temperature = "37.0 degC">
-        <population id="pop" component="wb1" size="1" type="populationList">
+    <network id="net1" type="networkWithTemperature" temperature = "37 degC">
+        <population id="pop" component="wb1" type="populationList" size="1">
             <instance id="0">
                 <location x="0" y="0" z="0"/>
             </instance>
@@ -158,5 +157,6 @@
         </inputList>
 
     </network>
+
 
 </neuroml>
