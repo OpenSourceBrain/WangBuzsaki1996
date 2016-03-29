@@ -5,15 +5,15 @@
 
 <!-- Ion channels -->
 
-    <!-- na channel: m_inf-->
+<!--
     <ComponentType name="gateWB"
                    extends="baseGate"
-                   descritpion="gate which describes the m variable of Na+ channel, describen in Wang & Buzsáki 1996">
+                   descritpion="gate which describes the m variable of Na+ channel, describen in WangBuzsáki 1996">
         
         <Child name="q10Settings" type="baseQ10Settings"/>
         <Child name="steadyState" type="baseVoltageDepVariable"/>
         
-        <Exposure name="tau" dimension="time"/>  <!-- Do I need this? -->
+        <Exposure name="tau" dimension="time"/>
         <Exposure name="inf" dimension="none"/>
         
         <Parameter name="frate" dimension="per_time"/>
@@ -35,7 +35,7 @@
             <DerivedVariable name="inf" dimension="none" exposure="inf" value="alpha/(alpha+beta)"/>
             <DerivedVariable name="tau" dimension="time" exposure="tau" value="1/((alpha+beta) * rateScale)"/>    
             
-            <TimeDerivative variable="q" value="(inf - q) / tau"/>  <!-- Do I need this?? (what is it actually?) -->
+            <TimeDerivative variable="q" value="(inf - q) / tau"/>
 
             <OnStart>
                 <StateAssignment variable="q" value="inf"/>
@@ -44,7 +44,7 @@
         </Dynamics>
         
     </ComponentType>
-
+-->
     <!-- k channel: n forward rate-->
     <ComponentType name="HHDoubleScaledExpLinearRate"
                    extends="baseVoltageDepVariable"
@@ -68,12 +68,13 @@
 
     <ionChannel id="na_chan" type="ionChannelHH" conductance="35nS" species="na">
 
-        <gateWB id="m" instances="3">
+        <gateHHratesTauInf id="m" instances="3">
             <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="37.0 degC"/>
-            <steadyState frate="1per_ms" fmidpoint="-35mv" fscale="-10mV" rrate="4per_ms" rmidpoint="-60mV" rscale="-18mV"/>
-        </gateWB>
+            <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-35mV" scale="-10mV"/>
+            <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-60mV" scale="-18mV"/>
+        </gateHHratesTauInf>
     
-        <gateHHrates id="h" instances="1"> <!-- OK -->
+        <gateHHrates id="h" instances="1"> 
             <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="37.0 degC"/>
             <forwardRate type="HHExpRate" rate="0.07per_ms" midpoint="-58mV" scale="-20mV"/>
             <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-28mV" scale="10mV"/>
@@ -81,7 +82,7 @@
 
     </ionChannel>
 
-    <ionChannel id="k_chan" type="ionChannelHH" conductance="9nS" species="k"> <!-- OK -->
+    <ionChannel id="k_chan" type="ionChannelHH" conductance="9nS" species="k"> 
 
         <gateHHrates id="n" instances="4">
             <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="37.0 degC"/>
