@@ -9,7 +9,6 @@ experiments:
         file:
           path: wangbuzsaki.dat
           columns: [0, 1]
-          header: 2
           scaling: [1000, 1000]
         spike detection:
           method: threshold

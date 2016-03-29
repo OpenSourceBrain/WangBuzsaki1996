@@ -13,5 +13,5 @@ experiments:
         spike detection:
           method: threshold
           threshold: 0
-          toerance: 0.01
+          toerance: 0.001
 
