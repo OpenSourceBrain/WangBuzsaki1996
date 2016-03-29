@@ -5,46 +5,45 @@
 
 <!-- Ion channels -->
 
-<!--
-    <ComponentType name="gateWB"
-                   extends="baseGate"
-                   descritpion="gate which describes the m variable of Na+ channel, describen in WangBuzsáki 1996">
-        
-        <Child name="q10Settings" type="baseQ10Settings"/>
-        <Child name="steadyState" type="baseVoltageDepVariable"/>
-        
+
+
+    <ComponentType name="gateHHratesInstantaneous"
+                   extends="gateHHrates"
+                   description="Gate which follows the general Hodgkin Huxley formalism, except for tau =0">
+
+        <Constant name="SEC" dimension="time" value="1 s"/>
+        <Child name="notes" type="notes"/>
+
+        <Child name="forwardRate" type="baseVoltageDepRate"/>
+        <Child name="reverseRate" type="baseVoltageDepRate"/>
+
+
+        <Exposure name="alpha" dimension="per_time"/>
+        <Exposure name="beta" dimension="per_time"/>
+
         <Exposure name="tau" dimension="time"/>
         <Exposure name="inf" dimension="none"/>
-        
-        <Parameter name="frate" dimension="per_time"/>
-        <Parameter name="fmidpoint" dimension="voltage"/>
-        <Parameter name="fscale" dimension="voltage"/>
-        <Parameter name="rrate" dimension="per_time"/>
-        <Parameter name="rmidpoint" dimension="voltage"/>
-        <Parameter name="rscale" dimension="voltage"/>
-        
-        <Dynamics>
-            <StateVariable name="q" exposure="q" dimension="none"/>
-            
-            <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="q^instances"/>
-            
-            <DerivedVariable name="tmp" dimension="none" value="(v-fmidpoint)/fscale"/> 
-            <DerivedVariable name="alpha" dimension="none" value="(frate*tmp)/(1-exp(0-(tmp)))"/>
-            <DerivedVariable name="beta" dimension="none" value="rrate*exp((v-rmidpoint)/rscale)"/>
-            
-            <DerivedVariable name="inf" dimension="none" exposure="inf" value="alpha/(alpha+beta)"/>
-            <DerivedVariable name="tau" dimension="time" exposure="tau" value="1/((alpha+beta) * rateScale)"/>    
-            
-            <TimeDerivative variable="q" value="(inf - q) / tau"/>
 
-            <OnStart>
-                <StateAssignment variable="q" value="inf"/>
-            </OnStart>
-            
+
+        <Dynamics>
+
+
+            <DerivedVariable name="alpha" dimension="per_time" exposure="alpha" select="forwardRate/r"/>
+            <DerivedVariable name="beta" dimension="per_time" exposure="beta" select="reverseRate/r"/>
+
+            <DerivedVariable name="inf" dimension="none" exposure="inf" value="alpha/(alpha+beta)"/>
+
+            <DerivedVariable name="tau" dimension="time" exposure="tau" value="0 * SEC"/>
+
+            <DerivedVariable name="q"  exposure="q" dimension="none" value="inf"/>
+
+            <DerivedVariable name="fcond" exposure="fcond" dimension="none" value="q^instances"/>
+
+
         </Dynamics>
-        
     </ComponentType>
--->
+
+
     <!-- k channel: n forward rate-->
     <ComponentType name="HHDoubleScaledExpLinearRate"
                    extends="baseVoltageDepVariable"
@@ -68,11 +67,10 @@
 
     <ionChannel id="na_chan" type="ionChannelHH" conductance="35nS" species="na">
 
-        <gateHHratesTauInf id="m" instances="3">
-            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="37.0 degC"/>
+        <gateHHrates type="gateHHratesInstantaneous" id="m" instances="3">
             <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-35mV" scale="-10mV"/>
             <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-60mV" scale="-18mV"/>
-        </gateHHratesTauInf>
+        </gateHHrates>
     
         <gateHHrates id="h" instances="1"> 
             <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="37.0 degC"/>
@@ -86,7 +84,8 @@
 
         <gateHHrates id="n" instances="4">
             <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="37.0 degC"/>
-            <forwardRate type="HHHHDoubleScaledExpLinearRate" rate="1per_ms" midpoint="-34mV" scale1="100mV" scale2="10"/>
+            <!--<forwardRate type="HHExpRate" rate="0.07per_ms" midpoint="-58mV" scale="-20mV"/>-->
+            <forwardRate type="HHDoubleScaledExpLinearRate" rate="0.01per_ms" midpoint="-34mV" scale1="10.1mV" scale2="10.1mV"/>
             <reverseRate type="HHExpRate" rate="0.125per_ms" midpoint="-44mV" scale="-80mV"/>
         </gateHHrates>
 
@@ -148,7 +147,7 @@
 <!-- Create a single-cell network -->
 
     <network id="net1" type="networkWithTemperature" temperature = "37.0 degC">
-        <population id="pop" component="wb1" size="1">
+        <population id="pop" component="wb1" size="1" type="populationList">
             <instance id="0">
                 <location x="0" y="0" z="0"/>
             </instance>

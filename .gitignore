@@ -7,3 +7,8 @@ x86_64
 /NEURON/wangbuzsaki.dat
 /NeuroML2/LEMS_ComponentType/wangbuzsaki.dat
 /NeuroML2/LEMS_ComponentType/time.dat
+/NEURON/wb.dat
+/NeuroML2/LEMS/wangbuzsaki.dat
+/NeuroML2/LEMS_ComponentType/IClamp_nml2.mod
+/NeuroML2/LEMS_ComponentType/LEMS_WangBuzsaki_nrn.py
+/NeuroML2/LEMS_ComponentType/wb1.mod
