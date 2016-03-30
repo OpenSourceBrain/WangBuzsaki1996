@@ -1,6 +1,6 @@
 ### NeuroML2/LEMS version of model 
 
-The model defined in the NEURON has been converted to a LEMS ComponentType defintion: [WangBuzsaki.xml](https://github.com/OpenSourceBrain/WangBuzsaki1996/blob/master/NeuroML2/LEMS_ComponentType/WangBuzsaki.xml).
+The model defined in the NEURON has been converted to a LEMS ComponentType defintion: [WangBuzsakiCell.xml](https://github.com/OpenSourceBrain/WangBuzsaki1996/blob/master/NeuroML2/LEMS_ComponentType/WangBuzsakiCell.xml).
 
 A LEMS file ([LEMS_WangBuzsaki.xml](https://github.com/OpenSourceBrain/WangBuzsaki1996/blob/master/NeuroML2/LEMS_ComponentType/LEMS_WangBuzsaki.xml)) creates a network with 1 instances of the cells:
 
