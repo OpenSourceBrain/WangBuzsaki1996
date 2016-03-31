@@ -13,10 +13,6 @@ env:
 virtualenv:
     system_site_packages: true
 
-#  Required for Brian
-before_install:
-    - sudo apt-get install -qq python-numpy python-scipy python-matplotlib python-sympy
-
 before_install:
     - sudo apt-get install -qq python-numpy python-scipy python-matplotlib python-sympy
 
