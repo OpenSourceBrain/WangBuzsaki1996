@@ -9,6 +9,9 @@ env:
     - OMV_ENGINE=jNeuroML
     - OMV_ENGINE=jNeuroML_NEURON
 
+before_install:
+    - sudo apt-get install -qq python-numpy python-scipy python-matplotlib python-sympy
+
 install: 
     - pip install git+https://github.com/OpenSourceBrain/osb-model-validation
 
