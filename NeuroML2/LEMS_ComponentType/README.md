@@ -21,4 +21,10 @@ or using [pyNeuroML](https://github.com/NeuroML/pyNeuroML):
     git clone https://github.com/OpenSourceBrain/WangBuzsaki1996.git # Clone GitHub repository
     cd WangBuzsaki1996/NeuroML2/LEMS_ComponentType
     pynml LEMS_WangBuzsaki.xml
+
+A .py file ([f_I_curve.py](https://github.com/OpenSourceBrain/WangBuzsaki1996/blob/master/NeuroML2/LEMS_ComponentType/f_I_curve.py)) gernerates the f-I curve as specifiedin the paper (Fig1.A)
+
+![](https://raw.githubusercontent.com/OpenSourceBrain/WangBuzsaki1996/master/NeuroML2/LEMS_ComponentType/f-I_cure.png)
+
+The script can be run locally using python after installing [pyNeuroML](https://github.com/NeuroML/pyNeuroML) and [pyelectro](https://github.com/NeuralEnsemble/pyelectro)
   
