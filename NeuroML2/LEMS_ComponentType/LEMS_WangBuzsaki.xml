@@ -10,9 +10,6 @@
     <Include file="Simulation.xml"/>
 
     <Include file="WangBuzsakiCell.xml"/>
-
-
-<!-- End of NeuroML2 content -->
         
 <!-- Simulation specifications -->
 
