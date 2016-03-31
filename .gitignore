@@ -16,3 +16,10 @@ x86_64
 /NeuroML2/LEMS_ComponentType/LEMS_iv_wb1.xml
 /NeuroML2/LEMS_ComponentType/iv_wb1.net.nml
 /NeuroML2/LEMS_ComponentType/iv_wb1.v.dat
+/NeuroML2/LEMS/IClamp_nml2.mod
+/NeuroML2/LEMS/LEMS_WangBuzsaki_nrn.py
+/NeuroML2/LEMS/k_chan.mod
+/NeuroML2/LEMS/leak.mod
+/NeuroML2/LEMS/na_chan.mod
+/NeuroML2/LEMS/time.dat
+/NeuroML2/LEMS/wb1.hoc
