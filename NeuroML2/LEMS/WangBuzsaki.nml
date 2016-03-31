@@ -70,12 +70,12 @@
     <ionChannel id="na_chan" type="ionChannelHH" conductance="35nS" species="na">
 
         <gateHHrates type="gateHHratesInstantaneous" id="m" instances="3">
-            <forwardRate type="HHDoubleScaledExpLinearRate" rate="1per_ms" midpoint="-35mV" scale1="-10mV" scale2="10mV"/>
+            <forwardRate type="HHExpLinearRate" rate="1per_ms" midpoint="-35mV" scale="10mV"/>
             <reverseRate type="HHExpRate" rate="4per_ms" midpoint="-60mV" scale="-18mV"/>
         </gateHHrates>
     
         <gateHHrates id="h" instances="1"> 
-            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="37.0 degC"/>
+            <q10Settings type="q10Fixed" fixedQ10="5"/>
             <forwardRate type="HHExpRate" rate="0.07per_ms" midpoint="-58mV" scale="-20mV"/>
             <reverseRate type="HHSigmoidRate" rate="1per_ms" midpoint="-28mV" scale="10mV"/>
         </gateHHrates>
@@ -85,8 +85,8 @@
     <ionChannel id="k_chan" type="ionChannelHH" conductance="9nS" species="k"> 
 
         <gateHHrates id="n" instances="4">
-            <q10Settings type="q10ExpTemp" q10Factor="3" experimentalTemp="37.0 degC"/>
-            <forwardRate type="HHDoubleScaledExpLinearRate" rate="1per_ms" midpoint="-34mV" scale1="-100mV" scale2="10mV"/>
+            <q10Settings type="q10Fixed" fixedQ10="5"/>
+            <forwardRate type="HHDoubleScaledExpLinearRate" rate="1per_ms" midpoint="-34mV" scale1="100mV" scale2="10mV"/>
             <reverseRate type="HHExpRate" rate="0.125per_ms" midpoint="-44mV" scale="-80mV"/>
         </gateHHrates>
 
@@ -119,7 +119,7 @@
 
             <membraneProperties>
 
-                <!--<channelDensity condDensity="35mS_per_cm2" id="na_all" ionChannel="na_chan" erev="55.0 mV" ion="na"/>-->
+                <channelDensity condDensity="35mS_per_cm2" id="na_all" ionChannel="na_chan" erev="55.0 mV" ion="na"/>
                 <channelDensity condDensity="9mS_per_cm2" id="k_all" ionChannel="k_chan" erev="-90.0 mV" ion="k"/>
                 <channelDensity condDensity="0.1mS_per_cm2" id="passive" ionChannel="leak" erev="-65 mV" ion="non_specific"/>
 
