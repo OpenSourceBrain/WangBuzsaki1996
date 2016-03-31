@@ -5,6 +5,9 @@ python: 2.7
 
 env:
     - OMV_ENGINE=NEURON
+    - OMV_ENGINE=Brian
+    - OMV_ENGINE=jNeuroML
+    - OMV_ENGINE=jNeuroML_NEURON
 
 install: 
     - pip install git+https://github.com/OpenSourceBrain/osb-model-validation

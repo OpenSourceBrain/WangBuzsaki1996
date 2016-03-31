@@ -12,3 +12,7 @@ x86_64
 /NeuroML2/LEMS_ComponentType/IClamp_nml2.mod
 /NeuroML2/LEMS_ComponentType/LEMS_WangBuzsaki_nrn.py
 /NeuroML2/LEMS_ComponentType/wb1.mod
+/Brian/WangBuzsaki.pyc
+/NeuroML2/LEMS_ComponentType/LEMS_iv_wb1.xml
+/NeuroML2/LEMS_ComponentType/iv_wb1.net.nml
+/NeuroML2/LEMS_ComponentType/iv_wb1.v.dat
