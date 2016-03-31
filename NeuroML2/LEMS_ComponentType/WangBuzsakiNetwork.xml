@@ -4,111 +4,12 @@
 
 <!-- Definition in LEMS of a new ComponentType for the Wang & Buzsáki 1996 model in Wang XJ and Buzsáki Gy (1996) -->
 
+    
+    <Include file="WangBuzsakiCell.xml"/>
+    
 
-<ComponentType name="wangBuzsakiBasketCell"
-               extends="baseCellMembPotCap"
-               description="Cell based on Wang XJ and Buzsáki Gy (1996)">
-
-        <!-- TODO: add synapses !!! -->
-
-        <Parameter name="r" dimension="length"/>
-        <Parameter name="C" dimension="capacitance"/>
-        <Parameter name="v0" dimension="voltage"/>
-
-        <!-- leak conductance -->
-        <Parameter name="gL" dimension="conductanceDensity"/>
-        <Parameter name="eL" dimension="voltage"/>
-
-        <!-- Na+ channel -->
-        <Parameter name="gNa" dimension="conductanceDensity"/>
-        <Parameter name="eNa" dimension="voltage"/>
-        <Parameter name="alpham_rate" dimension="per_time"/>
-        <Parameter name="alpham_midpoint" dimension="voltage"/>
-        <Parameter name="alpham_scale" dimension="voltage"/>
-        <Parameter name="betam_rate" dimension="per_time"/>
-        <Parameter name="betam_midpoint" dimension="voltage"/>
-        <Parameter name="betam_scale" dimension="voltage"/>
-        <Parameter name="h_q" dimension="none"/>
-        <Parameter name="alphah_rate" dimension="per_time"/>
-        <Parameter name="alphah_midpoint" dimension="voltage"/>
-        <Parameter name="alphah_scale" dimension="voltage"/>
-        <Parameter name="betah_rate" dimension="per_time"/>
-        <Parameter name="betah_scale" dimension="voltage"/>
-        <Parameter name="betah_midpoint" dimension="voltage"/>
-
-        <!-- K+ channel -->
-        <Parameter name="gK" dimension="conductanceDensity"/>
-        <Parameter name="eK" dimension="voltage"/>
-        <Parameter name="n_q" dimension="none"/>
-        <Parameter name="alphan_rate" dimension="per_time"/>
-        <Parameter name="alphan_midpoint" dimension="voltage"/>
-        <Parameter name="alphan_scale1" dimension="voltage"/>
-        <Parameter name="alphan_scale2" dimension="voltage"/>
-        <Parameter name="betan_rate" dimension="per_time"/>
-        <Parameter name="betan_midpoint" dimension="voltage"/>
-        <Parameter name="betan_scale" dimension="voltage"/>
-        <Parameter name="spikeThresh" dimension="voltage"/> 
-
-        <Attachments name="synapses" type="basePointCurrent"/>
-
-        <Exposure name="m_inf" dimension="none"/>
-        <Exposure name="h" dimension="none"/>
-        <Exposure name="h_inf" dimension="none"/>
-        <Exposure name="n" dimension="none"/>
-        <Exposure name="n_inf" dimension="none"/>
-        <Exposure name="iSyn" dimension="current" description="Total current due to synaptic inputs"/>
-        <Exposure name="spiking" dimension="none"/>
-       
-        <Dynamics>
-
-            <!-- baseCellMembPot compatibility -->
-            <StateVariable name="v" dimension="voltage" exposure="v"/>
-            
-            <StateVariable name="h" dimension="none" exposure="h"/>
-            <StateVariable name="n" dimension="none" exposure="n"/>
-            <StateVariable name="spiking" exposure="spiking" dimension="none"/>
-
-            <!-- chanel kinetics -->
-            <DerivedVariable name="tmp" dimension="none" value="(v-alpham_midpoint)/alpham_scale"/>
-            <DerivedVariable name="alpham" dimension="per_time" value="(alpham_rate*tmp)/(1-exp(0-tmp))"/>
-            <DerivedVariable name="betam" dimension="per_time" value="betam_rate*exp((v-betam_midpoint)/(betam_scale))"/>
-            <DerivedVariable name="m_inf" dimension="none" value="alpham/(alpham+betam)" exposure="m_inf"/>
-            <DerivedVariable name="alphah" dimension="per_time" value="alphah_rate*exp((v-alphah_midpoint)/(alphah_scale))"/>
-            <DerivedVariable name="betah" dimension="per_time" value="betah_rate/(exp((v-betah_midpoint)/betah_scale)+1)"/>
-            <DerivedVariable name="h_inf" dimension="none" value="alphah/(alphah+betah)" exposure="h_inf"/>            
-            <DerivedVariable name="alphan" dimension="per_time" value="(alphan_rate*(v-alphan_midpoint)/alphan_scale1)/(1-exp(0-(v-alphan_midpoint)/alphan_scale2))"/>
-            <DerivedVariable name="betan" dimension="per_time" value="betan_rate*exp((v-betan_midpoint)/(betan_scale))"/>
-            <DerivedVariable name="n_inf" dimension="none" value="alphan/(alphan+betan)" exposure="n_inf"/>
-            <DerivedVariable name="surface" dimension="area" value="4*3.1415926*r*r"/>
-            <DerivedVariable name="C_density" dimension="specificCapacitance" value="C/surface"/>
-            <DerivedVariable name="iSyn" dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
-
-            <!-- TODO: implement synaptic currents -->
-            <TimeDerivative variable="v" value="(-gL*(v-eL)-gNa*m_inf^3*h*(v-eNa)-gK*n^4*(v-eK))/(C_density)+iSyn/C"/>
-            <TimeDerivative variable="h" value="h_q*(alphah*(1-h)-betah*h)"/>
-            <TimeDerivative variable="n" value="n_q*(alphan*(1-n)-betan*n)"/>
-
-            <OnStart>
-                <StateAssignment variable="v" value="v0"/>
-                <StateAssignment variable="h" value="h_inf"/>
-                <StateAssignment variable="n" value="n_inf"/>
-                <StateAssignment variable="spiking" value="0"/>
-            </OnStart>
-
-            <OnCondition test="v .gt. spikeThresh .and. spiking .lt. 0.5">
-                <StateAssignment variable="spiking" value="1"/>
-                <EventOut port="spike"/>
-            </OnCondition>
-
-            <OnCondition test="v .lt. spikeThresh">
-                <StateAssignment variable="spiking" value="0"/>
-            </OnCondition>
-            
-        </Dynamics>
 
     <!-- Synapse -->
-
-    </ComponentType>
     
         <ComponentType name="wangBuzsakiSynapse"
                    extends="baseGradedSynapse"
@@ -145,7 +46,7 @@
     </ComponentType>
     
     
-    <wangBuzsakiBasketCell id="wb1" spikeThresh="0mV" r="2.82095um" C="1pF" v0="-70mV" gL="0.1mS_per_cm2" eL="-65mV" gNa="35mS_per_cm2" eNa="55mV" alpham_rate="1per_ms" alpham_midpoint="-35mV" alpham_scale="10mV"  betam_rate="4per_ms" betam_midpoint="-60mV" betam_scale="-18mV" h_q="5" alphah_rate="0.07per_ms" alphah_midpoint="-58mV" alphah_scale="-20mV" betah_rate="1per_ms" betah_midpoint="-28mV" betah_scale="-10mV"  gK="9mS_per_cm2" eK="-90mV" n_q="5" alphan_rate="1per_ms" alphan_midpoint="-34mV" alphan_scale1="100mV"  alphan_scale2="10mV" betan_rate="0.125per_ms" betan_midpoint="-44mV" betan_scale="-80mV"/> 
+    <wangBuzsakiBasketCell id="wb2" spikeThresh="0mV" r="2.82095um" C="1pF" v0="-64.0175mV" gL="0.1mS_per_cm2" eL="-65mV" gNa="35mS_per_cm2" eNa="55mV" alpham_rate="1per_ms" alpham_midpoint="-35mV" alpham_scale="10mV"  betam_rate="4per_ms" betam_midpoint="-60mV" betam_scale="-18mV" h_q="5" alphah_rate="0.07per_ms" alphah_midpoint="-58mV" alphah_scale="-20mV" betah_rate="1per_ms" betah_midpoint="-28mV" betah_scale="-10mV"  gK="9mS_per_cm2" eK="-90mV" n_q="5" alphan_rate="1per_ms" alphan_midpoint="-34mV" alphan_scale1="100mV"  alphan_scale2="10mV" betan_rate="0.125per_ms" betan_midpoint="-44mV" betan_scale="-80mV"/> 
     
     <wangBuzsakiSynapse id="wbs1" g_s="0.1nS" e_s="-75mV" Vth="0mV" Vscale="-2mV" alpha="12per_ms" beta="0.1per_ms"/>
     
@@ -155,26 +56,26 @@
 <!-- Create a network -->
     
     <!-- The surface of the cell is 100um2 (2pA: 2uA/cm2 input)-->
-    <pulseGenerator id="IClamp" delay="10ms" duration="10ms" amplitude="2pA"/>
+    <pulseGenerator id="IClamp2" delay="10ms" duration="10ms" amplitude="2pA"/>
 
-    <network id="net1" type="networkWithTemperature" temperature = "37 degC">
-        <population id="pop1" component="wb1" type="populationList" size="1">
+    <network id="net2" type="networkWithTemperature" temperature = "37 degC">
+        <population id="pop1" component="wb2" type="populationList" size="1">
             <instance id="0">
                 <location x="0" y="0" z="0"/>
             </instance>
         </population>
-        <population id="pop2" component="wb1" type="populationList" size="1">
+        <population id="pop2" component="wb2" type="populationList" size="1">
             <instance id="0">
                 <location x="0" y="0" z="10"/>
             </instance>
         </population>
 
         <continuousProjection id ="WBsynapse" presynapticPopulation="pop1" postsynapticPopulation="pop2">
-            <continuousConnectionInstance id="0" preCell="../pop1/0/wb1" postCell="../pop2/0/wb1" preComponent="silent" postComponent="wbs1"/>
+            <continuousConnectionInstance id="0" preCell="../pop1/0/wb2" postCell="../pop2/0/wb2" preComponent="silent" postComponent="wbs1"/>
         </continuousProjection>       
 
-        <inputList id="IClamp" component="IClamp" population="pop">
-            <input id="0" target="../pop1/0/wb1" destination="synapses"/>
+        <inputList id="IClamp" component="IClamp2" population="pop">
+            <input id="0" target="../pop1/0/wb2" destination="synapses"/>
         </inputList>
 
     </network>
