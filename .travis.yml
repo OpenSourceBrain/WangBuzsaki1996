@@ -8,6 +8,14 @@ env:
     - OMV_ENGINE=Brian
     - OMV_ENGINE=jNeuroML
     - OMV_ENGINE=jNeuroML_NEURON
+    
+
+virtualenv:
+    system_site_packages: true
+
+#  Required for Brian
+before_install:
+    - sudo apt-get install -qq python-numpy python-scipy python-matplotlib python-sympy
 
 before_install:
     - sudo apt-get install -qq python-numpy python-scipy python-matplotlib python-sympy
