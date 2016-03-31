@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Lems>
+
+    <Target component="sim1"/>
+    
+    <Include file="Cells.xml"/>
+    <Include file="Synapses.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+
+    <Include file="WangBuzsaki2Cells.xml"/>
+
+<!-- Simulation specifications -->
+
+    <Simulation id="sim1" length="150ms" step="0.001ms" target="net2">
+
+        <Display id="d1" title="WangBuzsaki PV+BC with 2uA/cm2 input (presynaptic)" timeScale="1ms" xmin="-10" xmax="160" ymin="-80" ymax="40">
+            <Line id="PV+BC V" quantity="pop1/0/wb2/v" scale="1mV" color="#0000FF" timeScale="1ms"/>
+        </Display>
+        
+        <Display id="d2" title="Input current: IClamp: 2pA input" timeScale="1ms" xmin="-10" xmax="160" ymin="-0.1" ymax="2.1">
+            <Line id="I_app" quantity="pop1/0/wb2/IClamp2/i" scale="1pA" color="#FF0000" timeScale="1ms"/>
+        </Display>
+        
+        <Display id="d3" title="WangBuzsaki PV+BC (postsynaptic)" timeScale="1ms" xmin="-10" xmax="160" ymin="-68" ymax="-63">
+            <Line id="PV+BC V" quantity="pop2/0/wb2/v" scale="1mV" color="#0000FF" timeScale="1ms"/>
+        </Display>             
+        
+        <Display id="d4" title="synaptic current" timeScale="1ms" xmin="-10"  xmax="160" ymin="-0.0011" ymax="0.0001">
+            <Line id="I_syn" quantity="pop2/0/wb2/wbs1/i" scale="1nA" color="#00FF00" timeScale="1ms" />
+        </Display>
+      
+    </Simulation>
+  
+</Lems>

@@ -1,0 +1,41 @@
+<Lems xmlns="http://www.neuroml.org/lems/0.6"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.neuroml.org/lems/0.6 https://raw.github.com/LEMS/LEMS/master/Schemas/LEMS/LEMS_v0.6.xsd">
+
+<!-- Definition in LEMS of a new ComponentType for the Wang & Buzsáki synapse in Wang XJ and Buzsáki Gy (1996) -->
+
+    <ComponentType name="wangBuzsakiSynapse"
+                   extends="baseGradedSynapse"
+                   description="Synapse based on Wang XJ and Buzsáki Gy (1996)">
+    
+        <Parameter name="g_s" dimension="conductance"/>
+        <Parameter name="e_s" dimension="voltage"/>
+        <Parameter name="Vth" dimension="voltage"/>
+        <Parameter name="Vscale" dimension="voltage"/>
+        <Parameter name="alpha" dimension="per_time"/>
+        <Parameter name="beta" dimension="per_time"/>
+
+        <Exposure name="i" dimension="current"/>
+        <Exposure name="s" dimension="none"/>
+        <Exposure name="F" dimension="none"/>
+
+        <Requirement name="v" dimension="voltage"/>
+
+        <InstanceRequirement name="peer" type="gapJunction"/>
+
+        <Dynamics>        
+            <StateVariable name="s" dimension="none" exposure="s"/>
+
+            <DerivedVariable name="vpeer" dimension="voltage" select="peer/v"/>
+
+            <DerivedVariable name="F" dimension="none" value="1 / (1 + exp((vpeer-Vth)/Vscale))" exposure="F"/>
+
+            <TimeDerivative variable="s" value="alpha*F*(1-s) - beta*s" />
+            
+            <DerivedVariable name="i" value="g_s*s*(e_s-v)" exposure="i"/>
+
+        </Dynamics>
+
+    </ComponentType>
+
+</Lems>

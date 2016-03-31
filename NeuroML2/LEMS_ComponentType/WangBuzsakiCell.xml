@@ -28,7 +28,7 @@
         <Parameter name="betam_rate" dimension="per_time"/>
         <Parameter name="betam_midpoint" dimension="voltage"/>
         <Parameter name="betam_scale" dimension="voltage"/>
-        <Parameter name="h_q" dimension="none"/>
+        <Parameter name="h_q10" dimension="none"/>
         <Parameter name="alphah_rate" dimension="per_time"/>
         <Parameter name="alphah_midpoint" dimension="voltage"/>
         <Parameter name="alphah_scale" dimension="voltage"/>
@@ -39,7 +39,7 @@
         <!-- K+ channel -->
         <Parameter name="gK" dimension="conductanceDensity"/>
         <Parameter name="eK" dimension="voltage"/>
-        <Parameter name="n_q" dimension="none"/>
+        <Parameter name="n_q10" dimension="none"/>
         <Parameter name="alphan_rate" dimension="per_time"/>
         <Parameter name="alphan_midpoint" dimension="voltage"/>
         <Parameter name="alphan_scale1" dimension="voltage"/>
@@ -85,8 +85,8 @@
 
             <!-- TODO: implement synaptic currents -->
             <TimeDerivative variable="v" value="(-gL*(v-eL)-gNa*m_inf^3*h*(v-eNa)-gK*n^4*(v-eK))/(C_density)+iSyn/C"/>
-            <TimeDerivative variable="h" value="h_q*(alphah*(1-h)-betah*h)"/>
-            <TimeDerivative variable="n" value="n_q*(alphan*(1-n)-betan*n)"/>
+            <TimeDerivative variable="h" value="h_q10*(alphah*(1-h)-betah*h)"/>
+            <TimeDerivative variable="n" value="n_q10*(alphan*(1-n)-betan*n)"/>
 
             <OnStart>
                 <StateAssignment variable="v" value="v0"/>
@@ -109,7 +109,7 @@
     </ComponentType>
     
     
-    <wangBuzsakiBasketCell id="wb1" spikeThresh="0mV" r="2.82095um" C="1pF" v0="-70mV" gL="0.1mS_per_cm2" eL="-65mV" gNa="35mS_per_cm2" eNa="55mV" alpham_rate="1per_ms" alpham_midpoint="-35mV" alpham_scale="10mV"  betam_rate="4per_ms" betam_midpoint="-60mV" betam_scale="-18mV" h_q="5" alphah_rate="0.07per_ms" alphah_midpoint="-58mV" alphah_scale="-20mV" betah_rate="1per_ms" betah_midpoint="-28mV" betah_scale="-10mV"  gK="9mS_per_cm2" eK="-90mV" n_q="5" alphan_rate="1per_ms" alphan_midpoint="-34mV" alphan_scale1="100mV"  alphan_scale2="10mV" betan_rate="0.125per_ms" betan_midpoint="-44mV" betan_scale="-80mV"/> 
+    <wangBuzsakiBasketCell id="wb1" spikeThresh="0mV" r="2.82095um" C="1pF" v0="-70mV" gL="0.1mS_per_cm2" eL="-65mV" gNa="35mS_per_cm2" eNa="55mV" alpham_rate="1per_ms" alpham_midpoint="-35mV" alpham_scale="10mV"  betam_rate="4per_ms" betam_midpoint="-60mV" betam_scale="-18mV" h_q10="5" alphah_rate="0.07per_ms" alphah_midpoint="-58mV" alphah_scale="-20mV" betah_rate="1per_ms" betah_midpoint="-28mV" betah_scale="-10mV"  gK="9mS_per_cm2" eK="-90mV" n_q10="5" alphan_rate="1per_ms" alphan_midpoint="-34mV" alphan_scale1="100mV"  alphan_scale2="10mV" betan_rate="0.125per_ms" betan_midpoint="-44mV" betan_scale="-80mV"/> 
     
 <!-- Create a single-cell network -->
     

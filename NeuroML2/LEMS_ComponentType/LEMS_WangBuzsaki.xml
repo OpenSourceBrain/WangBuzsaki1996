@@ -18,7 +18,7 @@
         <Display id="d1" title="WangBuzsaki PV+BC with 2uA/cm2 input" timeScale="1ms" xmin="-10" xmax="110" ymin="-80" ymax="40">
             <Line id="PV+BC V" quantity="pop/0/wb1/v" scale="1mV" color="#0000ff" timeScale="1ms"/>
         </Display>
-        
+<!--        
         <Display id="d2" title="gating variables" timeScale="1ms" xmin="-10"  xmax="110" ymin="-0.05" ymax="1.05">
             <Line id="m_inf" quantity="pop/0/wb1/m_inf" scale="1" color="#FF0000" timeScale="1ms" />
             <Line id="h" quantity="pop/0/wb1/h" scale="1" color="#FFFF00" timeScale="1ms" />
@@ -26,7 +26,7 @@
             <Line id="n" quantity="pop/0/wb1/n" scale="1" color="#0099FF" timeScale="1ms" />
             <Line id="n_inf" quantity="pop/0/wb1/n_inf" scale="1" color="#0000FF" timeScale="1ms" />
         </Display>
-    
+-->    
         <OutputFile id="of0" fileName="wangbuzsaki.dat">
             <OutputColumn id="bc" quantity="pop/0/wb1/v"/>
         </OutputFile>
