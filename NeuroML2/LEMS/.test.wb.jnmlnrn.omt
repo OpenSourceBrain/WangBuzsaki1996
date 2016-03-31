@@ -1,5 +1,5 @@
 target: LEMS_WangBuzsaki.xml
-engine: jNeuroML
+engine: jNeuroML_NEURON
 mep: ../../.test.wb.mep
 experiments:
   current clamp:
@@ -12,4 +12,4 @@ experiments:
         spike detection: 
           method: threshold
           threshold: 0
-        tolerance: 0.0085
+        tolerance: 0.003

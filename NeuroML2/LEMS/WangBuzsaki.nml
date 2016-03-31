@@ -3,10 +3,7 @@
          xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2  https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta2.xsd" 
          id="wb1">
 
-    
-<!-- END of new ComponentTypes -->
-
-    <ionChannelHH id="leak" conductance="0.1nS" /> <!--species="non_specific"/>-->
+    <ionChannelHH id="leak" conductance="0.1nS" />
 
     <ionChannelHH id="na_chan" conductance="35nS" species="na">
 
@@ -68,7 +65,7 @@
 
             <intracellularProperties>
 
-                <resistivity value="0.1 kohm_cm"/>
+                <resistivity value="0.1 kohm_cm"/> <!-- Could be anything (because it's only one compartment)-->
 
             </intracellularProperties>
 
@@ -95,7 +92,7 @@
 
     </network>
 
-<!-- Ion channels -->
+<!-- new ComponentTypes for Ion channels -->
 
     <ComponentType name="gateHHratesInstantaneous"
                    extends="gateHHrates"
