@@ -67,7 +67,7 @@ def generate_WB_network(cell_id,
                 
     net.projections.append(proj)
     
-    
+    '''
     # Add outer input (IClamp)
     tmp = rnd.normal(I_mean, I_sigma**2, numCells_bc)  # random numbers from Gaussian distribution
     for i in range(0, numCells_bc):
@@ -76,11 +76,11 @@ def generate_WB_network(cell_id,
         nml_doc.pulse_generators.append(pg)
     
         input_list = neuroml.InputList(id='input%i'%i, component='IClamp_%i'%i, populations=pop.id)
-        input = neuroml.Input(id=i, target='%s[%i]'%(pop.id, i), destination='wbs1')
+        input = neuroml.Input(id=i, target='../%s[%i]'%(pop.id, i), destination='wbs1')
         input_list.input.append(input)
         
         net.input_lists.append(input_list)
-    
+    '''
     
     # Write to file
     nml_file = '%sNet.nml'%ref
@@ -98,7 +98,7 @@ def generate_WB_network(cell_id,
     if generate_LEMS_simulation:
         
         # Vreate a LEMSSimulation to manage creation of LEMS file
-        ls = LEMSSimulation(network_id, duration, dt)
+        ls = LEMSSimulation(sim_id='sim_%s'%ref, duration=duration, dt=dt)
         
         # Point to network as target of simulation
         ls.assign_simulation_target(net.id)
