@@ -98,7 +98,7 @@ def generate_WB_network(cell_id,
     if generate_LEMS_simulation:
         
         # Vreate a LEMSSimulation to manage creation of LEMS file
-        ls = LEMSSimulation(sim_id='sim_%s'%ref, duration=duration, dt=dt)
+        ls = LEMSSimulation(sim_id='%sNetSim'%ref, duration=duration, dt=dt)
         
         # Point to network as target of simulation
         ls.assign_simulation_target(net.id)
