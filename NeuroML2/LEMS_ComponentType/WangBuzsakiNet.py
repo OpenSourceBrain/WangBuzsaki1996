@@ -105,6 +105,8 @@ def generate_WB_network(cell_id,
         
         # Incude generated/existing NeuroML2 files
         ls.include_neuroml2_file(nml_file, include_included=False)
+        ls.include_neuroml2_file('WangBuzsakiCell.xml', include_included=False)
+        ls.include_neuroml2_file('WangBuzsakiSynapse.xml', include_included=False)
         
         # Specify Display and output files
         disp_bc = 'display_bc'
