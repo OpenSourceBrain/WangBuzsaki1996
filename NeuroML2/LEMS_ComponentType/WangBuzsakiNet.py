@@ -61,7 +61,7 @@ def generate_WB_network(cell_id,
     for i in range(0, numCells_bc):
         for j in range(0, numCells_bc):
             if i != j and rnd.random() < connection_probability:
-                connection = neuroml.Connection(id=conn_count, pre_cell_id='../%s/%i'%(pop.id, i), post_cell_id='../%s/%i'%(pop.id, j))
+                connection = neuroml.Connection(id=conn_count, pre_cell_id='../%s/%i/%s'%(pop.id, i, cell_id), post_cell_id='../%s/%i/%s'%(pop.id, j, cell_id))
                 proj.connections.append(connection)
                 conn_count += 1
                 
@@ -107,8 +107,6 @@ def generate_WB_network(cell_id,
         ls.include_neuroml2_file('WangBuzsakiCell.xml', include_included=False)
         ls.include_neuroml2_file('WangBuzsakiSynapse.xml', include_included=False)
         ls.include_neuroml2_file(nml_file, include_included=False)
-        ls.include_neuroml2_file('WangBuzsakiCell.xml', include_included=False)
-        ls.include_neuroml2_file('WangBuzsakiSynapse.xml', include_included=False)
         
         # Specify Display and output files
         disp_bc = 'display_bc'
@@ -117,12 +115,14 @@ def generate_WB_network(cell_id,
         of_bc = 'volts_file_bc'
         ls.create_output_file(of_bc, 'wangbuzsaki_network.dat')
         
+        '''
         of_spikes_bc = 'of_spikes_bc'
         ls.create_event_output_file(of_spikes_bc, 'wangbuzsaki_network_spikes.dat')
+        '''
         
         max_traces = 25
         for i in range(numCells_bc):
-            quantity = '%s/%i/v'%(pop.id, i)
+            quantity = '%s/%i/%s/v'%(pop.id, i, cell_id)
             if i < max_traces:
                 ls.add_line_to_display(disp_bc, 'BC %i: Vm'%i, quantity, '1mV', pynml.get_next_hex_color())
             ls.add_column_to_output_file(of_bc, 'v_%i'%i, quantity)
