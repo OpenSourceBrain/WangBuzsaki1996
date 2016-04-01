@@ -37,5 +37,9 @@
         </Dynamics>
 
     </ComponentType>
+    
+    <wangBuzsakiSynapse id="wbs1" g_s="0.1nS" e_s="-75mV" Vth="0mV" Vscale="-2mV" alpha="12per_ms" beta="0.1per_ms"/>
+    
+
 
 </Lems>
