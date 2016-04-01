@@ -61,7 +61,7 @@ def generate_WB_network(cell_id,
     for i in range(0, numCells_bc):
         for j in range(0, numCells_bc):
             if i != j and rnd.random() < connection_probability:
-                connection = neuroml.Connection(id=conn_count, pre_cell_id='../%s[%i]'%(pop.id, i), post_cell_id='../%s[%i]'%(pop.id, j))
+                connection = neuroml.Connection(id=conn_count, pre_cell_id='../%s/%i'%(pop.id, i), post_cell_id='../%s/%i'%(pop.id, j))
                 proj.connections.append(connection)
                 conn_count += 1
                 
@@ -104,6 +104,8 @@ def generate_WB_network(cell_id,
         ls.assign_simulation_target(net.id)
         
         # Incude generated/existing NeuroML2 files
+        ls.include_neuroml2_file('WangBuzsakiCell.xml', include_included=False)
+        ls.include_neuroml2_file('WangBuzsakiSynapse.xml', include_included=False)
         ls.include_neuroml2_file(nml_file, include_included=False)
         
         # Specify Display and output files
@@ -118,7 +120,7 @@ def generate_WB_network(cell_id,
         
         max_traces = 25
         for i in range(numCells_bc):
-            quantity = '%s[%i]/v'%(pop.id, i)
+            quantity = '%s/%i/v'%(pop.id, i)
             if i < max_traces:
                 ls.add_line_to_display(disp_bc, 'BC %i: Vm'%i, quantity, '1mV', pynml.get_next_hex_color())
             ls.add_column_to_output_file(of_bc, 'v_%i'%i, quantity)
