@@ -55,17 +55,17 @@ def generate_WB_network(cell_id,
         
     
     # Add connections
-    proj = neuroml.Projection(id=ref+'proj', synapse=synapse_id, presynaptic_population=pop.id, postsynaptic_population=pop.id)
+    proj = neuroml.ContinuousProjection(id=ref+'proj', presynaptic_population=pop.id, postsynaptic_population=pop.id)
     
     conn_count = 0
     for i in range(0, numCells_bc):
         for j in range(0, numCells_bc):
             if i != j and rnd.random() < connection_probability:
-                connection = neuroml.Connection(id=conn_count, pre_cell_id='../%s/%i/%s'%(pop.id, i, cell_id), post_cell_id='../%s/%i/%s'%(pop.id, j, cell_id))
-                proj.connections.append(connection)
+                connection = neuroml.ContinuousConnectionInstance(id=conn_count, pre_cell='../%s/%i/%s'%(pop.id, i, cell_id), pre_component='silent', post_cell='../%s/%i/%s'%(pop.id, j, cell_id), post_component=synapse_id)
+                proj.continuous_connection_instances.append(connection)
                 conn_count += 1
                 
-    net.projections.append(proj)
+    net.continuous_projections.append(proj)
     
     '''
     # Add outer input (IClamp)
