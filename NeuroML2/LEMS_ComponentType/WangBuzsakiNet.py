@@ -158,11 +158,11 @@ def generate_WB_network(cell_id,
 if __name__ == '__main__':
     
     generate_LEMS_simulation = True
-    save_raster_plot = False
+    save_raster_plot = True
     
-    numCells_bc = 10
+    numCells_bc = 100
     duration = 500  # [ms]
-    ls, lems_file_name = generate_WB_network('wb1', 'wbs1', numCells_bc, 1, 1, 0.1, generate_LEMS_simulation, duration)
+    ls, lems_file_name = generate_WB_network('wb1', 'wbs2', numCells_bc, 1, 1, 0.1, generate_LEMS_simulation, duration)
 
 
     if generate_LEMS_simulation:
@@ -174,11 +174,12 @@ if __name__ == '__main__':
         print 'Loading LEMS file: %s and running with jNeuroML_NEURON'%(lems_file_name)
         # sim = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True)
 
-        if save_raster_plot:
-            tmp = np.loadtxt('wangbuzsaki_network_spikes.dat', delimiter='\t')
-            spikingNeurons = tmp[:, 0].tolist()
-            spikeTimes = tmp[:, 1].tolist()
+    if save_raster_plot:
+        tmp = np.loadtxt('wangbuzsaki_network_spikes.dat', delimiter='\t')
+        spikingNeurons = tmp[:, 0].tolist()
+        spikeTimes = tmp[:, 1].tolist()
         
-            raster_plot(spikeTimes, spikingNeurons, duration, numCells_bc)
+        raster_plot(spikeTimes, spikingNeurons, duration, numCells_bc)
+        print 'Raster plot saved'
 
   
