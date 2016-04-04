@@ -67,7 +67,7 @@ def generate_WB_network(cell_id,
                 
     net.continuous_projections.append(proj)
     
-    '''
+    
     # Add outer input (IClamp)
     tmp = rnd.normal(I_mean, I_sigma**2, numCells_bc)  # random numbers from Gaussian distribution
     for i in range(0, numCells_bc):
@@ -75,12 +75,12 @@ def generate_WB_network(cell_id,
         
         nml_doc.pulse_generators.append(pg)
     
-        input_list = neuroml.InputList(id='input%i'%i, component='IClamp_%i'%i, populations=pop.id)
-        input = neuroml.Input(id=i, target='../%s[%i]'%(pop.id, i), destination='wbs1')
+        input_list = neuroml.InputList(id='input%i'%i, component='IClamp%i'%i, populations=pop.id)
+        input = neuroml.Input(id=i, target='../%s/%i/%s'%(pop.id, i, cell_id), destination='synapses')
         input_list.input.append(input)
         
         net.input_lists.append(input_list)
-    '''
+    
     
     # Write to file
     nml_file = '%sNet.nml'%ref
@@ -115,12 +115,10 @@ def generate_WB_network(cell_id,
         of_bc = 'volts_file_bc'
         ls.create_output_file(of_bc, 'wangbuzsaki_network.dat')
         
-        '''
-        of_spikes_bc = 'of_spikes_bc'
+        of_spikes_bc = 'spikes_bc'
         ls.create_event_output_file(of_spikes_bc, 'wangbuzsaki_network_spikes.dat')
-        '''
         
-        max_traces = 25
+        max_traces = 10
         for i in range(numCells_bc):
             quantity = '%s/%i/%s/v'%(pop.id, i, cell_id)
             if i < max_traces:
