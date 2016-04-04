@@ -70,11 +70,25 @@ def generate_WB_network(cell_id,
                 
     net.continuous_projections.append(proj)
     
+    # make cell pop inhomogenouos (different V_init-s with voltage-clamp)
+    vc_dur = 2  # ms
+    for i in range(0, numCells_bc):
+        tmp = -75 + (rnd.random()*20)
+        vc = neuroml.VoltageClamp(id='VClamp%i'%i, delay='0ms', duration='%ims'%vc_dur, simple_series_resistance='1e6ohm', target_voltage='%imV'%tmp)
+        
+        nml_doc.voltage_clamps.append(vc)
+        
+        input_list = neuroml.InputList(id='input_%i'%i, component='VClamp%i'%i, populations=pop.id)
+        input = neuroml.Input(id=i, target='../%s/%i/%s'%(pop.id, i, cell_id), destination='synapses')
+        input_list.input.append(input)
+        
+        net.input_lists.append(input_list)
     
+    '''
     # Add outer input (IClamp)
     tmp = rnd.normal(I_mean, I_sigma**2, numCells_bc)  # random numbers from Gaussian distribution
     for i in range(0, numCells_bc):
-        pg = neuroml.PulseGenerator(id='IClamp%i'%i, delay='0ms', duration='%sms'%duration, amplitude='%fpA'%(tmp[i]))
+        pg = neuroml.PulseGenerator(id='IClamp%i'%i, delay='%ims'%vc_dur, duration='%ims'%(duration-vc_dur), amplitude='%fpA'%(tmp[i]))
         
         nml_doc.pulse_generators.append(pg)
     
@@ -83,7 +97,7 @@ def generate_WB_network(cell_id,
         input_list.input.append(input)
         
         net.input_lists.append(input_list)
-    
+    '''
     
     # Write to file
     nml_file = '%sNet.nml'%ref
@@ -145,17 +159,18 @@ if __name__ == '__main__':
     
     generate_LEMS_simulation = True
     
-    numCells_bc = 100
+    numCells_bc = 10
     duration = 500  # [ms]
     ls, lems_file_name = generate_WB_network('wb1', 'wbs1', numCells_bc, 1, 1, 0.1, generate_LEMS_simulation, duration)
     
+    '''
     if generate_LEMS_simulation:
         # run with jNeuroML
-        print 'Loading LEMS file: %s and running with jNeuroML'%(lems_file_name)
-        sim = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True)
+        # print 'Loading LEMS file: %s and running with jNeuroML'%(lems_file_name)
+        # sim = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True)
         
         # run with jNeuroML_NEURON
-        # print 'Loading LEMS file: %s and running with jNeuroML_NEURON'%(lems_file_name)
+        print 'Loading LEMS file: %s and running with jNeuroML_NEURON'%(lems_file_name)
         # sim = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True)
 
         tmp = np.loadtxt('wangbuzsaki_network_spikes.dat', delimiter='\t')
@@ -163,5 +178,5 @@ if __name__ == '__main__':
         spikeTimes = tmp[:, 1].tolist()
         
         raster_plot(spikeTimes, spikingNeurons, duration, numCells_bc)#, show=True)
-    
+    '''
   
