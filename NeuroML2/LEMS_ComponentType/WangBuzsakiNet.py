@@ -6,6 +6,7 @@ from neuroml import __version__
 from pyneuroml import pynml
 from pyneuroml.lems.LEMSSimulation import LEMSSimulation
 
+import numpy as np
 import numpy.random as rnd
 rnd.seed(43297)
 
@@ -124,6 +125,7 @@ def generate_WB_network(cell_id,
             if i < max_traces:
                 ls.add_line_to_display(disp_bc, 'BC %i: Vm'%i, quantity, '1mV', pynml.get_next_hex_color())
             ls.add_column_to_output_file(of_bc, 'v_%i'%i, quantity)
+            ls.add_selection_to_event_output_file(of_spikes_bc, i, select='%s/%i/%s'%(pop.id, i, cell_id), event_port='spike')
             
         # Save to LEMS file
         print 'Writing LEMS file...'
@@ -143,9 +145,13 @@ if __name__ == '__main__':
     
     ls, lems_file_name = generate_WB_network('wb1', 'wbs1', 0.6, 1, 0.1, generate_LEMS_simulation)
     
-    # if generate_LEMS_simulation:
+    from plots import raster_plot
+    
+    if generate_LEMS_simulation:
         # run with jNeuroML
-        # sim = pynml.run_lems_with_jneuroml(lems_file_name, nogui='True', load_saved_data='False', plot='True')
+        sim = pynml.run_lems_with_jneuroml(lems_file_name, nogui='True', load_saved_data='False', plot='True')
+
+        tmp = np.loadtxt('wangbuzsaki_network_spikes.dat', delimiter='\t')
     
         # run with jNeuroML_NEURON
         # sim = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui='True', load_saved_data='False', plot='True')    
