@@ -10,26 +10,28 @@ import numpy as np
 import numpy.random as rnd
 rnd.seed(43297)
 
+from plots import raster_plot
+
 ref = 'WangBuzsaki'
 nml_doc = neuroml.NeuroMLDocument(id=ref)
 
 # Define Wang - Buzsáki 1996 network
 def generate_WB_network(cell_id,
                     synapse_id,
+                    numCells_bc,
                     connection_probability,
                     I_mean,
                     I_sigma,
                     generate_LEMS_simulation,
+                    duration,
                     x_size                   = 100,
                     y_size                   = 100,
                     z_size                   = 100,
                     network_id               = ref+'Network',
-                    numCells_bc              = 10,
                     color                    = '0 0 1',
                     connection               = True,
                     temperature              = '37 degC',
                     validate                 = True,
-                    duration                 = 500,  # ms
                     dt                       = 0.01):
     
     nml_doc = neuroml.NeuroMLDocument(id=network_id)
@@ -143,15 +145,23 @@ if __name__ == '__main__':
     
     generate_LEMS_simulation = True
     
-    ls, lems_file_name = generate_WB_network('wb1', 'wbs1', 0.6, 1, 0.1, generate_LEMS_simulation)
-    
-    from plots import raster_plot
+    numCells_bc = 100
+    duration = 500  # [ms]
+    ls, lems_file_name = generate_WB_network('wb1', 'wbs1', numCells_bc, 1, 1, 0.1, generate_LEMS_simulation, duration)
     
     if generate_LEMS_simulation:
         # run with jNeuroML
-        sim = pynml.run_lems_with_jneuroml(lems_file_name, nogui='True', load_saved_data='False', plot='True')
+        print 'Loading LEMS file: %s and running with jNeuroML'%(lems_file_name)
+        sim = pynml.run_lems_with_jneuroml(lems_file_name, nogui=True)
+        
+        # run with jNeuroML_NEURON
+        # print 'Loading LEMS file: %s and running with jNeuroML_NEURON'%(lems_file_name)
+        # sim = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True)
 
         tmp = np.loadtxt('wangbuzsaki_network_spikes.dat', delimiter='\t')
+        spikingNeurons = tmp[:, 0].tolist()
+        spikeTimes = tmp[:, 1].tolist()
+        
+        raster_plot(spikeTimes, spikingNeurons, duration, numCells_bc)#, show=True)
     
-        # run with jNeuroML_NEURON
-        # sim = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui='True', load_saved_data='False', plot='True')    
+  
