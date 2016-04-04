@@ -32,7 +32,7 @@ def generate_WB_network(cell_id,
                     connection               = True,
                     temperature              = '37 degC',
                     validate                 = True,
-                    dt                       = 0.01):
+                    dt                       = 0.001):
     
     nml_doc = neuroml.NeuroMLDocument(id=network_id)
     nml_doc.includes.append(neuroml.IncludeType(href='WangBuzsakiCell.xml'))
@@ -73,7 +73,7 @@ def generate_WB_network(cell_id,
     # make cell pop inhomogenouos (different V_init-s with voltage-clamp)
     vc_dur = 2  # ms
     for i in range(0, numCells_bc):
-        tmp = -75 + (rnd.random()*20)
+        tmp = -75 + (rnd.random()*15)
         vc = neuroml.VoltageClamp(id='VClamp%i'%i, delay='0ms', duration='%ims'%vc_dur, simple_series_resistance='1e6ohm', target_voltage='%imV'%tmp)
         
         nml_doc.voltage_clamps.append(vc)
@@ -84,7 +84,7 @@ def generate_WB_network(cell_id,
         
         net.input_lists.append(input_list)
     
-    '''
+    
     # Add outer input (IClamp)
     tmp = rnd.normal(I_mean, I_sigma**2, numCells_bc)  # random numbers from Gaussian distribution
     for i in range(0, numCells_bc):
@@ -97,7 +97,7 @@ def generate_WB_network(cell_id,
         input_list.input.append(input)
         
         net.input_lists.append(input_list)
-    '''
+    
     
     # Write to file
     nml_file = '%sNet.nml'%ref
@@ -135,7 +135,7 @@ def generate_WB_network(cell_id,
         of_spikes_bc = 'spikes_bc'
         ls.create_event_output_file(of_spikes_bc, 'wangbuzsaki_network_spikes.dat')
         
-        max_traces = 10
+        max_traces = 9  # the 10th color in NEURON is white ... 
         for i in range(numCells_bc):
             quantity = '%s/%i/%s/v'%(pop.id, i, cell_id)
             if i < max_traces:
@@ -158,12 +158,13 @@ def generate_WB_network(cell_id,
 if __name__ == '__main__':
     
     generate_LEMS_simulation = True
+    save_raster_plot = False
     
     numCells_bc = 10
     duration = 500  # [ms]
     ls, lems_file_name = generate_WB_network('wb1', 'wbs1', numCells_bc, 1, 1, 0.1, generate_LEMS_simulation, duration)
-    
-    '''
+
+
     if generate_LEMS_simulation:
         # run with jNeuroML
         # print 'Loading LEMS file: %s and running with jNeuroML'%(lems_file_name)
@@ -173,10 +174,11 @@ if __name__ == '__main__':
         print 'Loading LEMS file: %s and running with jNeuroML_NEURON'%(lems_file_name)
         # sim = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True)
 
-        tmp = np.loadtxt('wangbuzsaki_network_spikes.dat', delimiter='\t')
-        spikingNeurons = tmp[:, 0].tolist()
-        spikeTimes = tmp[:, 1].tolist()
+        if save_raster_plot:
+            tmp = np.loadtxt('wangbuzsaki_network_spikes.dat', delimiter='\t')
+            spikingNeurons = tmp[:, 0].tolist()
+            spikeTimes = tmp[:, 1].tolist()
         
-        raster_plot(spikeTimes, spikingNeurons, duration, numCells_bc)#, show=True)
-    '''
+            raster_plot(spikeTimes, spikingNeurons, duration, numCells_bc)
+
   
