@@ -10,9 +10,16 @@ This model was originally developed in [NEURON](https://www.neuron.yale.edu/neur
 
 More details on the original NEURON version of this model [here](https://github.com/OpenSourceBrain/WangBuzsaki1996/tree/master/ModelDB_NEURON).
 
+In addition we created a simplified NEURON version, with a single cell and current clamp (in order to create a .mep file, which against LEMS/NeuroML2 implementation could be tested). More detailes on this NEURON version [here](https://github.com/OpenSourceBrain/WangBuzsaki1996/tree/master/NEURON)
+
+-------------------------------------------------------------------------------------------------------------------------------
+
 ### NeuroML2/LEMS version of model
 
-The model will be converted to NeuroML2/LEMS:
+The model has been converted to NeuroML2/LEMS:
 
-------------------------------
+More details on the NeuroML2/LEMS version of this model [here](https://github.com/OpenSourceBrain/WangBuzsaki1996/tree/master/NeuroML2/LEMS_ComponentType).
+
+-------------------------------------------------------------------------------------------------------------------------------
+
 [![Build Status](https://travis-ci.org/OpenSourceBrain/WangBuzsaki1996.svg?branch=master)](https://travis-ci.org/OpenSourceBrain/WangBuzsaki1996)
