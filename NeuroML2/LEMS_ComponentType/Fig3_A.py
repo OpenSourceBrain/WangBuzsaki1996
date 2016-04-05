@@ -175,7 +175,7 @@ if __name__ == '__main__':
         raster_plot('wangbuzsaki_network_spikes.dat', duration, numCells_bc)
         print 'Raster plot saved'
         
-        voltage_plots('wangbuzsaki_network.dat', [5, 6])
+        voltage_plots('wangbuzsaki_network.dat', [15, 83])
         print 'Voltage plot saved'
         
         
