@@ -18,7 +18,7 @@ In addition we created a simplified NEURON version, with a single cell and curre
 
 The model has been converted to NeuroML2/LEMS:
 
-![](https://raw.githubusercontent.com/OpenSourceBrain/WangBuzsaki1996/master/ModelDB_NEURON/WangBuzsaki96_neuroml2.png)
+![](https://raw.githubusercontent.com/OpenSourceBrain/WangBuzsaki1996/master/NeuroML2/LEMS_ComponentType/WangBuzsaki96_neuroml2.png)
 
 More details on the NeuroML2/LEMS version of this model [here](https://github.com/OpenSourceBrain/WangBuzsaki1996/tree/master/NeuroML2/LEMS_ComponentType).
 
