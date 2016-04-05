@@ -158,11 +158,11 @@ def generate_WB_network(cell_id,
 if __name__ == '__main__':
     
     generate_LEMS_simulation = True
-    save_raster_plot = True
+    save_raster_plot = False
     
-    numCells_bc = 100
+    numCells_bc = 10
     duration = 500  # [ms]
-    ls, lems_file_name = generate_WB_network('wb1', 'wbs2', numCells_bc, 1, 1, 0.1, generate_LEMS_simulation, duration)
+    ls, lems_file_name = generate_WB_network('wbNet', 'wbsNet', numCells_bc, 1, 1, 0.1, generate_LEMS_simulation, duration)
 
 
     if generate_LEMS_simulation:

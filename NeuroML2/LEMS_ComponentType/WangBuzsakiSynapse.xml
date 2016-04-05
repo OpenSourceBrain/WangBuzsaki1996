@@ -37,9 +37,10 @@
         </Dynamics>
 
     </ComponentType>
-    <!-- g_s="0.1nS" (in network it's devided by M_syn)-->
+ 
     <wangBuzsakiSynapse id="wbs1" g_s="0.1nS" e_s="-75mV" Vth="0mV" Vscale="-2mV" alpha="12per_ms" beta="0.1per_ms"/>
-    <wangBuzsakiSynapse id="wbs2" g_s="1pS" e_s="-75mV" Vth="0mV" Vscale="-2mV" alpha="12per_ms" beta="0.1per_ms"/>
+    <!-- g_s="0.1nS" (in network it's devided by M_syn)-->
+    <wangBuzsakiSynapse id="wbsNet" g_s="1pS" e_s="-75mV" Vth="0mV" Vscale="-2mV" alpha="12per_ms" beta="0.1per_ms"/>
     <silentSynapse id="silent"/>  
 
 
