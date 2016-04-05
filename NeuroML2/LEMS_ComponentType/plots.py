@@ -3,16 +3,28 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+mplPars = { #'text.usetex'       :    True,
+            'axes.labelsize'    :   'large',
+            'font.family'       :   'serif',
+            'font.sans-serif'   :   'computer modern roman',
+            'font.size'         :    18,
+            'xtick.labelsize'   :    16,
+            'ytick.labelsize'   :    16
+            }
+for key, val in mplPars.items():
+    plt.rcParams[key] = val
+
 def raster_plot(data, tstop, nnumber, show=False):
     
     tmp = np.loadtxt(data, delimiter='\t')
     spikingNeurons = tmp[:, 0].tolist()
     spikeTimes = tmp[:, 1].tolist()
+    s = [8]*len(spikeTimes)
 
     fig = plt.figure(figsize=(10, 8))
 
     ax = fig.add_subplot(1, 1, 1)
-    ax.scatter(spikeTimes, spikingNeurons, c='blue', marker='.', lw=0)
+    ax.scatter(spikeTimes, spikingNeurons, s=s)
     ax.set_title('Raster plot')
     ax.set_xlim([0, tstop])
     ax.set_xlabel('Time [ms]')
