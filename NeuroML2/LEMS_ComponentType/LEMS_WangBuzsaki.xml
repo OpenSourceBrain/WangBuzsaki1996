@@ -27,6 +27,7 @@
             <Line id="n_inf" quantity="pop/0/wb1/n_inf" scale="1" color="#0000FF" timeScale="1ms" />
         </Display>
 -->    
+
         <OutputFile id="of0" fileName="wangbuzsaki.dat">
             <OutputColumn id="bc" quantity="pop/0/wb1/v"/>
         </OutputFile>
