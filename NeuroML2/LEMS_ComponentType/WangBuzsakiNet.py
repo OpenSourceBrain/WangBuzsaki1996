@@ -6,11 +6,10 @@ from neuroml import __version__
 from pyneuroml import pynml
 from pyneuroml.lems.LEMSSimulation import LEMSSimulation
 
-import numpy as np
 import numpy.random as rnd
 rnd.seed(43297)
 
-from plots import raster_plot
+from plots import raster_plot, voltage_plots
 
 ref = 'WangBuzsaki'
 nml_doc = neuroml.NeuroMLDocument(id=ref)
@@ -158,11 +157,11 @@ def generate_WB_network(cell_id,
 if __name__ == '__main__':
     
     generate_LEMS_simulation = True
-    save_raster_plot = False
+    save_plots = False
     
-    numCells_bc = 10
+    numCells_bc = 100
     duration = 500  # [ms]
-    ls, lems_file_name = generate_WB_network('wbNet', 'wbsNet', numCells_bc, 1, 1, 0.1, generate_LEMS_simulation, duration)
+    ls, lems_file_name = generate_WB_network('wbNet', 'wbsNet06', numCells_bc, 0.6, 1, 0.03, generate_LEMS_simulation, duration)
 
 
     if generate_LEMS_simulation:
@@ -174,12 +173,16 @@ if __name__ == '__main__':
         print 'Loading LEMS file: %s and running with jNeuroML_NEURON'%(lems_file_name)
         # sim = pynml.run_lems_with_jneuroml_neuron(lems_file_name, nogui=True)
 
-    if save_raster_plot:
-        tmp = np.loadtxt('wangbuzsaki_network_spikes.dat', delimiter='\t')
-        spikingNeurons = tmp[:, 0].tolist()
-        spikeTimes = tmp[:, 1].tolist()
+    if save_plots:
         
-        raster_plot(spikeTimes, spikingNeurons, duration, numCells_bc)
+        raster_plot('wangbuzsaki_network_spikes.dat', duration, numCells_bc)
         print 'Raster plot saved'
+        
+        voltage_plots('wangbuzsaki_network.dat', [25, 50, 75])
+        print 'Voltage plot saved'
+        
+        
+        
+        
 
   

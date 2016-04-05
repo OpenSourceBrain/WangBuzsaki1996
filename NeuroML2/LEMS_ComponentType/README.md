@@ -52,6 +52,9 @@ A .py file ([Fig3_A.py](https://github.com/OpenSourceBrain/WangBuzsaki1996/blob/
 ![](https://raw.githubusercontent.com/OpenSourceBrain/WangBuzsaki1996/master/NeuroML2/LEMS_ComponentType/wangbuzsakinetwork.png)
 
 An other .py file ([WangBuzsakiNet.py](https://github.com/OpenSourceBrain/WangBuzsaki1996/blob/master/NeuroML2/LEMS_ComponentType/WangBuzsakiNet.py)) enables one to create any kind of network (from the [cell](https://github.com/OpenSourceBrain/WangBuzsaki1996/blob/master/NeuroML2/LEMS_ComponentType/WangBuzsakiCell.xml) and [synapse](https://github.com/OpenSourceBrain/WangBuzsaki1996/blob/master/NeuroML2/LEMS_ComponentType/WangBuzsakiSynapse.xml) described in the .xml files) and export it as a LEMS simulation.
+> Eg.: connection probability = 0.6, I_mu = 1 uA/cm2, I_sigma = 0.03 as specified in the paper (Fig8C) 
+
+![](https://raw.githubusercontent.com/OpenSourceBrain/WangBuzsaki1996/master/NeuroML2/LEMS_ComponentType/wangbuzsakinetwork2.png)
 
 The scripts can be run locally using python after installing [pyNeuroML](https://github.com/NeuroML/pyNeuroML) and [libNeuroML](https://github.com/NeuralEnsemble/libNeuroML)
 
