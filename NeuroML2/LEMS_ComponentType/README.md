@@ -47,7 +47,7 @@ applies currents to the presynaptic cell as specified in the paper (Fig1.C) and 
 --------------------------------------------------------------------------------------------------------------
 
 A .py file ([Fig3_A.py](https://github.com/OpenSourceBrain/WangBuzsaki1996/blob/master/NeuroML2/LEMS_ComponentType/Fig3_A.py)) creates a network with 100 instances of cells, connected in all-to-all manner, applies current as specified in the paper and reproduce the same figures as the original NEURON code.
-> Note: this figures are not the same nes as the figures (Fig3.A) in the paper...
+> Note: these figures are not the same as the figures (Fig3.A) in the paper...
 
 ![](https://raw.githubusercontent.com/OpenSourceBrain/WangBuzsaki1996/master/NeuroML2/LEMS_ComponentType/wangbuzsakinetwork.png)
 
