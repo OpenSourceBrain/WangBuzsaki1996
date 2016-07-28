@@ -1,3 +1,9 @@
+#
+#   This requires further investigation in the pylems code related to 
+#   order of initialisation of variables
+#   See https://github.com/LEMS/pylems/issues/37
+#
+
 target: LEMS_WangBuzsaki.xml
 engine: PyLEMS_NeuroML2
 mep: ../../.test.wb.mep
