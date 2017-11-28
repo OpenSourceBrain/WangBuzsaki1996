@@ -9,7 +9,7 @@
     <Include file="Networks.xml"/>
     <Include file="Simulation.xml"/>
 
-    <Include file="WangBuzsaki.nml"/>
+    <Include file="WangBuzsaki.net.nml"/>
  
 <!-- Simulation specifications -->
 

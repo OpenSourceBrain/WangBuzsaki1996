@@ -1,6 +1,6 @@
 ### NeuroML2/LEMS version of model 
 
-The model defined in the NEURON has been converted to a LEMS using built in NeuroML2 CoreTypes: [WangBuzsaki.nml](https://github.com/OpenSourceBrain/WangBuzsaki1996/blob/master/NeuroML2/LEMS/WangBuzsaki.nml).
+The model defined in the NEURON has been converted to a LEMS using built in NeuroML2 CoreTypes for ion channels and cellular properties: [WangBuzsaki.cell.nml](https://github.com/OpenSourceBrain/WangBuzsaki1996/blob/master/NeuroML2/LEMS/WangBuzsaki.cell.nml).
 
 A LEMS file ([LEMS_WangBuzsaki.xml](https://github.com/OpenSourceBrain/WangBuzsaki1996/blob/master/NeuroML2/LEMS/LEMS_WangBuzsaki.xml)) creates a network with 1 instances of the cell, applies currents as specified in the paper (Fig3.A) and runs a simulation with the cell:
   

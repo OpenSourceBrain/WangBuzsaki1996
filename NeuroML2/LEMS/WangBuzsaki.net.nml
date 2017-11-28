@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2beta4.xsd"
+    id="wb1_net">
+    
+    <include href="WangBuzsaki.cell.nml"/>
+
+   <!-- Point process: Current clamp -->
+
+    <pulseGenerator id="IClamp" delay="0ms" duration="100ms" amplitude="2pA" />
+
+    <!-- Create a single-cell network -->
+
+    <network id="net1" type="networkWithTemperature" temperature="37 degC">
+        <population id="pop" component="wb1" type="populationList" size="1">
+            <instance id="0">
+                <location x="0" y="0" z="0"/>
+            </instance>
+        </population>
+
+        <inputList id="IClamp" component="IClamp" population="pop">
+            <input id="0" target="../pop/0/wb1" destination="synapses"/>
+        </inputList>
+
+    </network>
+  
+</neuroml>

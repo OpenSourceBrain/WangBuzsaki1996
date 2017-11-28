@@ -9,8 +9,6 @@
                extends="baseCellMembPotCap"
                description="Cell based on Wang XJ and Buzsáki Gy (1996)">
 
-        <!-- TODO: add synapses !!! -->
-
         <Parameter name="r" dimension="length"/>
         <Parameter name="C" dimension="capacitance"/>
         <Parameter name="v0" dimension="voltage"/>
@@ -42,8 +40,7 @@
         <Parameter name="n_q10" dimension="none"/>
         <Parameter name="alphan_rate" dimension="per_time"/>
         <Parameter name="alphan_midpoint" dimension="voltage"/>
-        <Parameter name="alphan_scale1" dimension="voltage"/>
-        <Parameter name="alphan_scale2" dimension="voltage"/>
+        <Parameter name="alphan_scale" dimension="voltage"/>
         <Parameter name="betan_rate" dimension="per_time"/>
         <Parameter name="betan_midpoint" dimension="voltage"/>
         <Parameter name="betan_scale" dimension="voltage"/>
@@ -76,7 +73,7 @@
             <DerivedVariable name="alphah" dimension="per_time" value="alphah_rate*exp((v-alphah_midpoint)/(alphah_scale))"/>
             <DerivedVariable name="betah" dimension="per_time" value="betah_rate/(exp((v-betah_midpoint)/betah_scale)+1)"/>
             <DerivedVariable name="h_inf" dimension="none" value="alphah/(alphah+betah)" exposure="h_inf"/>            
-            <DerivedVariable name="alphan" dimension="per_time" value="(alphan_rate*(v-alphan_midpoint)/alphan_scale1)/(1-exp(0-(v-alphan_midpoint)/alphan_scale2))"/>
+            <DerivedVariable name="alphan" dimension="per_time" value="(alphan_rate*(v-alphan_midpoint)/alphan_scale)/(1-exp(0-(v-alphan_midpoint)/alphan_scale))"/>
             <DerivedVariable name="betan" dimension="per_time" value="betan_rate*exp((v-betan_midpoint)/(betan_scale))"/>
             <DerivedVariable name="n_inf" dimension="none" value="alphan/(alphan+betan)" exposure="n_inf"/>
             <DerivedVariable name="surface" dimension="area" value="4*3.1415926*r*r"/>
@@ -109,11 +106,11 @@
     </ComponentType>
     
     <!-- wb1: model for testing-->
-    <wangBuzsakiBasketCell id="wb1" spikeThresh="0mV" r="2.82095um" C="1pF" v0="-70mV" gL="0.1mS_per_cm2" eL="-65mV" gNa="35mS_per_cm2" eNa="55mV" alpham_rate="1per_ms" alpham_midpoint="-35mV" alpham_scale="10mV"  betam_rate="4per_ms" betam_midpoint="-60mV" betam_scale="-18mV" h_q10="5" alphah_rate="0.07per_ms" alphah_midpoint="-58mV" alphah_scale="-20mV" betah_rate="1per_ms" betah_midpoint="-28mV" betah_scale="-10mV"  gK="9mS_per_cm2" eK="-90mV" n_q10="5" alphan_rate="1per_ms" alphan_midpoint="-34mV" alphan_scale1="100mV"  alphan_scale2="10mV" betan_rate="0.125per_ms" betan_midpoint="-44mV" betan_scale="-80mV"/> 
+    <wangBuzsakiBasketCell id="wb1" spikeThresh="0mV" r="2.82095um" C="1pF" v0="-70mV" gL="0.1mS_per_cm2" eL="-65mV" gNa="35mS_per_cm2" eNa="55mV" alpham_rate="1per_ms" alpham_midpoint="-35mV" alpham_scale="10mV"  betam_rate="4per_ms" betam_midpoint="-60mV" betam_scale="-18mV" h_q10="5" alphah_rate="0.07per_ms" alphah_midpoint="-58mV" alphah_scale="-20mV" betah_rate="1per_ms" betah_midpoint="-28mV" betah_scale="-10mV"  gK="9mS_per_cm2" eK="-90mV" n_q10="5" alphan_rate="0.1per_ms" alphan_midpoint="-34mV" alphan_scale="10mV" betan_rate="0.125per_ms" betan_midpoint="-44mV" betan_scale="-80mV"/> 
     <!-- wb2: model for testing synapse (v0 differs)-->
-    <wangBuzsakiBasketCell id="wb2" spikeThresh="0mV" r="2.82095um" C="1pF" v0="-64.0175mV" gL="0.1mS_per_cm2" eL="-65mV" gNa="35mS_per_cm2" eNa="55mV" alpham_rate="1per_ms" alpham_midpoint="-35mV" alpham_scale="10mV"  betam_rate="4per_ms" betam_midpoint="-60mV" betam_scale="-18mV" h_q10="5" alphah_rate="0.07per_ms" alphah_midpoint="-58mV" alphah_scale="-20mV" betah_rate="1per_ms" betah_midpoint="-28mV" betah_scale="-10mV"  gK="9mS_per_cm2" eK="-90mV" n_q10="5" alphan_rate="1per_ms" alphan_midpoint="-34mV" alphan_scale1="100mV"  alphan_scale2="10mV" betan_rate="0.125per_ms" betan_midpoint="-44mV" betan_scale="-80mV"/>  
+    <wangBuzsakiBasketCell id="wb2" spikeThresh="0mV" r="2.82095um" C="1pF" v0="-64.0175mV" gL="0.1mS_per_cm2" eL="-65mV" gNa="35mS_per_cm2" eNa="55mV" alpham_rate="1per_ms" alpham_midpoint="-35mV" alpham_scale="10mV"  betam_rate="4per_ms" betam_midpoint="-60mV" betam_scale="-18mV" h_q10="5" alphah_rate="0.07per_ms" alphah_midpoint="-58mV" alphah_scale="-20mV" betah_rate="1per_ms" betah_midpoint="-28mV" betah_scale="-10mV"  gK="9mS_per_cm2" eK="-90mV" n_q10="5" alphan_rate="0.1per_ms" alphan_midpoint="-34mV" alphan_scale="10mV" betan_rate="0.125per_ms" betan_midpoint="-44mV" betan_scale="-80mV"/>  
     <!-- wbNet: model for network symulations (spikeTresh differs) -->
-    <wangBuzsakiBasketCell id="wbNet" spikeThresh="-52mV" r="2.82095um" C="1pF" v0="-70mV" gL="0.1mS_per_cm2" eL="-65mV" gNa="35mS_per_cm2" eNa="55mV" alpham_rate="1per_ms" alpham_midpoint="-35mV" alpham_scale="10mV"  betam_rate="4per_ms" betam_midpoint="-60mV" betam_scale="-18mV" h_q10="5" alphah_rate="0.07per_ms" alphah_midpoint="-58mV" alphah_scale="-20mV" betah_rate="1per_ms" betah_midpoint="-28mV" betah_scale="-10mV"  gK="9mS_per_cm2" eK="-90mV" n_q10="5" alphan_rate="1per_ms" alphan_midpoint="-34mV" alphan_scale1="100mV"  alphan_scale2="10mV" betan_rate="0.125per_ms" betan_midpoint="-44mV" betan_scale="-80mV"/>
+    <wangBuzsakiBasketCell id="wbNet" spikeThresh="-52mV" r="2.82095um" C="1pF" v0="-70mV" gL="0.1mS_per_cm2" eL="-65mV" gNa="35mS_per_cm2" eNa="55mV" alpham_rate="1per_ms" alpham_midpoint="-35mV" alpham_scale="10mV"  betam_rate="4per_ms" betam_midpoint="-60mV" betam_scale="-18mV" h_q10="5" alphah_rate="0.07per_ms" alphah_midpoint="-58mV" alphah_scale="-20mV" betah_rate="1per_ms" betah_midpoint="-28mV" betah_scale="-10mV"  gK="9mS_per_cm2" eK="-90mV" n_q10="5" alphan_rate="0.1per_ms" alphan_midpoint="-34mV" alphan_scale="10mV" betan_rate="0.125per_ms" betan_midpoint="-44mV" betan_scale="-80mV"/>
     
 <!-- Create a single-cell network -->
     

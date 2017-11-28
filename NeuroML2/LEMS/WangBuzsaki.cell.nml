@@ -24,7 +24,7 @@
 
         <gateHHrates id="n" instances="4">
             <q10Settings type="q10Fixed" fixedQ10="5"/>
-            <forwardRate type="HHDoubleScaledExpLinearRate" rate="1per_ms" midpoint="-34mV" scale1="100mV" scale2="10mV"/>
+            <forwardRate type="HHExpLinearRate" rate="0.1per_ms" midpoint="-34mV" scale="10mV"/>
             <reverseRate type="HHExpRate" rate="0.125per_ms" midpoint="-44mV" scale="-80mV"/>
         </gateHHrates>
 
@@ -73,26 +73,7 @@
 
     </cell>
 
-<!-- Point process: Current clamp -->
-
-    <pulseGenerator id="IClamp" delay="0ms" duration="100ms" amplitude="2pA" />
-
-<!-- Create a single-cell network -->
-
-    <network id="net1" type="networkWithTemperature" temperature = "37 degC">
-        <population id="pop" component="wb1" type="populationList" size="1">
-            <instance id="0">
-                <location x="0" y="0" z="0"/>
-            </instance>
-        </population>
-
-        <inputList id="IClamp" component="IClamp" population="pop">
-            <input id="0" target="../pop/0/wb1" destination="synapses"/>
-        </inputList>
-
-    </network>
-
-<!-- new ComponentTypes for Ion channels -->
+<!-- new ComponentTypes for Ion channel -->
 
     <ComponentType name="gateHHratesInstantaneous"
                    extends="gateHHrates"
@@ -130,26 +111,6 @@
 
         </Dynamics>
         
-    </ComponentType>
-
-    <ComponentType name="HHDoubleScaledExpLinearRate"
-                   extends="baseVoltageDepRate"
-                   description="Exponential linear form for variable equation (to describe some of the channel rates in WangBuzsáki1996)">
-        
-        <Parameter name="rate" dimension="per_time"/>
-        <Parameter name="midpoint" dimension="voltage"/>
-        <Parameter name="scale1" dimension="voltage"/>
-        <Parameter name="scale2" dimension="voltage"/>
-
-        <Dynamics>         
-            <DerivedVariable name="tmp" value="(v - midpoint)/scale2" dimension="none"/>
-
-            <ConditionalDerivedVariable name="r" exposure="r" dimension="per_time">
-                <Case condition="tmp .neq. 0" value="rate * ((v - midpoint)/scale1) / (1 - exp(0 - tmp))"/>
-                <Case condition="tmp .eq. 0" value="rate"/>
-            </ConditionalDerivedVariable>
-        </Dynamics>
-
     </ComponentType>
 
 </neuroml>
