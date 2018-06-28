@@ -1,0 +1,10 @@
+system: Testing the Wang-Buzsáki 1996 Basket cell model
+
+experiments:
+  c1:
+    expected:
+      spike times: [16.281]
+  c2:
+    expected:
+      spike times: [44.119]
+

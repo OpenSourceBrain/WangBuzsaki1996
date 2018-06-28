@@ -1,0 +1,26 @@
+target: LEMS_Fig1_C.xml
+engine: jNeuroML_NEURON
+mep: .test.fig1c.mep
+experiments:
+  c1:
+    observables:
+      spike times:
+        file: 
+          path: fig1c.dat
+          columns: [0,1]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: 0
+        tolerance: 0
+  c2:
+    observables:
+      spike times:
+        file: 
+          path: fig1c.dat
+          columns: [0,2]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: -66
+        tolerance: 0

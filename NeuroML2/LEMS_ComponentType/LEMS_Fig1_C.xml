@@ -30,6 +30,12 @@
             <Line id="I_syn" quantity="pop2/0/wb2/wbs1/i" scale="1nA" color="#00FF00" timeScale="1ms" />
         </Display>
       
+      
+        <OutputFile id="of0" fileName="fig1c.dat">
+            <OutputColumn id="c1" quantity="pop1/0/wb2/v"/>
+            <OutputColumn id="c2" quantity="pop2/0/wb2/v"/>
+        </OutputFile>
+        
     </Simulation>
   
 </Lems>
