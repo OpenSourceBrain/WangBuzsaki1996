@@ -19,3 +19,4 @@ NeuroML2/../*nrn.py
 /NeuroML2/LEMS_ComponentType/WangBuzsakiNet.nml
 /NeuroML2/LEMS_ComponentType/raster_plot.png
 /NeuroML2/LEMS_ComponentType/voltage_plot.png
+/NeuroML2/LEMS/LEMS_WangBuzsakiNetSim.xml
