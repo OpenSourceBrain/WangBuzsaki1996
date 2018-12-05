@@ -202,7 +202,7 @@
     <voltageClamp id="VClamp98" delay="0ms" duration="2ms" targetVoltage="-69mV" simpleSeriesResistance="1e6ohm"/>
     <voltageClamp id="VClamp99" delay="0ms" duration="2ms" targetVoltage="-66mV" simpleSeriesResistance="1e6ohm"/>
     <network id="WangBuzsakiNetwork" type="networkWithTemperature" temperature="37 degC">
-        <notes>Network generated using libNeuroML v0.2.43</notes>
+        <notes>Network generated using libNeuroML v0.2.45</notes>
         <population id="WangBuzsakipop" component="wb1" size="100" type="populationList">
             <property tag="color" value="0 0 1"/>
             <instance id="0">

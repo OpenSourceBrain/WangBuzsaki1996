@@ -99,7 +99,7 @@ def generate_WB_network(cell_id,
     
     
     # Write to file
-    nml_file = '%sNet.nml'%ref
+    nml_file = '%s100Cells.net.nml'%ref
     print 'Writing network file to:', nml_file, '...'
     neuroml.writers.NeuroMLWriter.write(nml_doc, nml_file)
     
