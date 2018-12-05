@@ -34,6 +34,8 @@
 <!-- Cellular properties -->
 
     <cell id="wb1">
+        
+        <notes>Implementation in NeuroML of hippocampal interneuron from  Wang & Buzsaki, 1996</notes>
 
         <morphology id="just_a_cylinder">
 
