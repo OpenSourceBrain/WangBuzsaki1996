@@ -22,6 +22,7 @@ env:
     - OMV_ENGINE=Brian
     - OMV_ENGINE=jNeuroML
     - OMV_ENGINE=jNeuroML_NEURON
+    - OMV_ENGINE=jNeuroML_NetPyNE
 
 install: 
     - pip install scipy # Why is this needed? Doesn't seem to get installed correctly on trusty with addons above...

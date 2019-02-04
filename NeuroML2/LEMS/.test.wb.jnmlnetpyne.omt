@@ -1,0 +1,15 @@
+target: LEMS_WangBuzsaki.xml
+engine: jNeuroML_NetPyNE
+mep: ../../.test.wb.mep
+experiments:
+  current clamp:
+    observables:
+      spike times:
+        file: 
+          path: wangbuzsaki.dat
+          columns: [0,1]
+          scaling: [1000, 1000]
+        spike detection: 
+          method: threshold
+          threshold: 0
+        tolerance: 0.0025716930884320506
