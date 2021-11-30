@@ -24,8 +24,7 @@ More details on the NeuroML2/LEMS version of this model [here](https://github.co
 
 -------------------------------------------------------------------------------------------------------------------------------
 
-[![Build Status](https://travis-ci.org/OpenSourceBrain/WangBuzsaki1996.svg?branch=master)](https://travis-ci.org/OpenSourceBrain/WangBuzsaki1996)
-
+[![Continuous build using OMV](https://github.com/OpenSourceBrain/WangBuzsaki1996/actions/workflows/omv-ci.yml/badge.svg)](https://github.com/OpenSourceBrain/WangBuzsaki1996/actions/workflows/omv-ci.yml)
 
 ### Reusing this model
 
