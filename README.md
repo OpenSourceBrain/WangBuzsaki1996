@@ -1,5 +1,7 @@
 # Wang & Buzsáki 1996
 
+[![Continuous build using OMV](https://github.com/OpenSourceBrain/WangBuzsaki1996/actions/workflows/omv-ci.yml/badge.svg)](https://github.com/OpenSourceBrain/WangBuzsaki1996/actions/workflows/omv-ci.yml)
+
 Model from: Wang XJ, Buzsaki G (1996) Gamma oscillation by synaptic inhibition in a hippocampal interneuronal network model. [J Neurosci 16:6402-13](http://www.jneurosci.org/content/16/20/6402.full)
 
 ### NEURON version of model:
@@ -23,8 +25,6 @@ The model has been converted to NeuroML2/LEMS:
 More details on the NeuroML2/LEMS version of this model [here](https://github.com/OpenSourceBrain/WangBuzsaki1996/tree/master/NeuroML2/LEMS_ComponentType).
 
 -------------------------------------------------------------------------------------------------------------------------------
-
-[![Continuous build using OMV](https://github.com/OpenSourceBrain/WangBuzsaki1996/actions/workflows/omv-ci.yml/badge.svg)](https://github.com/OpenSourceBrain/WangBuzsaki1996/actions/workflows/omv-ci.yml)
 
 ### Reusing this model
 
