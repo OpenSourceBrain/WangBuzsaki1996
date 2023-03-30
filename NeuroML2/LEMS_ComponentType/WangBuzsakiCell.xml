@@ -10,7 +10,6 @@
                description="Cell based on Wang XJ and Buzsáki Gy (1996)">
 
         <Parameter name="r" dimension="length"/>
-        <Parameter name="C" dimension="capacitance"/>
         <Parameter name="v0" dimension="voltage"/>
 
         <!-- leak conductance -->
@@ -53,7 +52,6 @@
         <Exposure name="h_inf" dimension="none"/>
         <Exposure name="n" dimension="none"/>
         <Exposure name="n_inf" dimension="none"/>
-        <Exposure name="iSyn" dimension="current" description="Total current due to synaptic inputs"/>
         <Exposure name="spiking" dimension="none"/>
        
         <Dynamics>
@@ -81,7 +79,7 @@
             <DerivedVariable name="iSyn" dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
 
             <!-- TODO: implement synaptic currents -->
-            <TimeDerivative variable="v" value="(-gL*(v-eL)-gNa*m_inf^3*h*(v-eNa)-gK*n^4*(v-eK))/(C_density)+iSyn/C"/>
+            <TimeDerivative variable="v" value="(gL*(eL-v)+gNa*m_inf^3*h*(eNa-v)+gK*n^4*(eK-v))/(C_density)+iSyn/C"/>
             <TimeDerivative variable="h" value="h_q10*(alphah*(1-h)-betah*h)"/>
             <TimeDerivative variable="n" value="n_q10*(alphan*(1-n)-betan*n)"/>
 
