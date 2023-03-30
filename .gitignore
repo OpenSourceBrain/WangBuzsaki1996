@@ -21,3 +21,5 @@ NeuroML2/../*nrn.py
 /NeuroML2/LEMS_ComponentType/voltage_plot.png
 /NeuroML2/LEMS/LEMS_WangBuzsakiNetSim.xml
 /NeuroML2/LEMS/LEMS_WangBuzsaki_netpyne.py
+*_brian2.py
+*_eden.py

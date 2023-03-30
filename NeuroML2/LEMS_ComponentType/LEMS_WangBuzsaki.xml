@@ -15,8 +15,8 @@
 
     <Simulation id="sim1" length="100ms" step="0.001ms" target="net1">
 
-        <Display id="d1" title="WangBuzsaki PV+BC with 2uA/cm2 input" timeScale="1ms" xmin="-10" xmax="110" ymin="-80" ymax="40">
-            <Line id="PV+BC V" quantity="pop/0/wb1/v" scale="1mV" color="#0000ff" timeScale="1ms"/>
+        <Display id="d1" title="WangBuzsaki PV_BC with 2uA/cm2 input" timeScale="1ms" xmin="-10" xmax="110" ymin="-80" ymax="40">
+            <Line id="PV_BC V" quantity="pop/0/wb1/v" scale="1mV" color="#0000ff" timeScale="1ms"/>
         </Display>
         
         <Display id="d2" title="gating variables" timeScale="1ms" xmin="-10"  xmax="110" ymin="-0.05" ymax="1.05">
