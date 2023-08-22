@@ -1,4 +1,4 @@
-from brian import *
+from brian2 import *
 
 def main(dt):
     '''
@@ -32,7 +32,7 @@ def main(dt):
     neuron = NeuronGroup(1, eqs)
     neuron.v = -70 * mV
     neuron.h = 1
-    M = StateMonitor(neuron, 'v', record=0)
+    M = StateMonitor(neuron, 'v', record=True)
 
     defaultclock.dt=dt*ms
 
