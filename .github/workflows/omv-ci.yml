@@ -3,9 +3,9 @@ name: Continuous build using OMV
 
 on:
   push:
-    branches: [ master, development, experimental ]
+    branches: [ master, development, experimental, working_ver ]
   pull_request:
-    branches: [ master, development, experimental ]
+    branches: [ master, development, experimental, working_ver ]
 
 jobs:
   build:
