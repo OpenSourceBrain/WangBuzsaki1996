@@ -32,7 +32,7 @@
 
             <TimeDerivative variable="s" value="alpha*F*(1-s) - beta*s" />
             
-            <DerivedVariable name="i" value="g_s*s*(e_s-v)" exposure="i"/>
+            <DerivedVariable name="i" dimension="current" value="g_s*s*(e_s-v)" exposure="i"/>
 
         </Dynamics>
 
@@ -41,6 +41,7 @@
     <wangBuzsakiSynapse id="wbs1" g_s="0.1nS" e_s="-75mV" Vth="0mV" Vscale="-2mV" alpha="12per_ms" beta="0.1per_ms"/>
     <!-- g_s="0.1nS" (in network it's devided by M_syn)-->
     <wangBuzsakiSynapse id="wbsNet" g_s="1pS" e_s="-75mV" Vth="0mV" Vscale="-2mV" alpha="12per_ms" beta="0.1per_ms"/>
+
     <silentSynapse id="silent"/>  
 
 

@@ -75,11 +75,11 @@
             <DerivedVariable name="alphan" dimension="per_time" value="(alphan_rate*(v-alphan_midpoint)/alphan_scale)/(1-exp(0-(v-alphan_midpoint)/alphan_scale))"/>
             <DerivedVariable name="betan" dimension="per_time" value="betan_rate*exp((v-betan_midpoint)/(betan_scale))"/>
             <DerivedVariable name="n_inf" dimension="none" value="alphan/(alphan+betan)" exposure="n_inf"/>
-            <DerivedVariable name="surface" dimension="area" value="3.1415926*length*diameter"/>
+            <DerivedVariable name="surface_area" dimension="area" value="3.1415926*length*diameter"/>
 
             <DerivedVariable name="iSyn" dimension="current" exposure="iSyn" select="synapses[*]/i" reduce="add" />
 
-            <DerivedVariable name="iMemb" dimension="current" exposure="iMemb" value="surface*(gL*(eL-v)+gNa*m_inf^3*h*(eNa-v)+gK*n^4*(eK-v)) + iSyn"/>
+            <DerivedVariable name="iMemb" dimension="current" exposure="iMemb" value="surface_area*(gL*(eL-v)+gNa*m_inf^3*h*(eNa-v)+gK*n^4*(eK-v)) + iSyn"/>
 
             <TimeDerivative variable="v" value="iMemb / C"/>
 
